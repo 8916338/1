@@ -12,7 +12,7 @@
       {
         "name": "误道者",
         "icon": "vip/jueson.jpg",
-        "desc": "",
+        "desc": "主站 · 一线稳定线路",
         "domains": [
           "https://0.wudaozhe.net",
           "https://0.12yue.de5.net",
@@ -122,8 +122,9 @@
   ],
 
   "videoTabs": [
-    { "id": "online-video", "icon": "🎞️", "label": "在线视频", "file": "cy/站点2.json" },
-    { "id": "tools",        "icon": "🧰", "label": "常用工具", "file": "cy/站点1.json" }
+    { "id": "shop-recommend", "icon": "⭐", "label": "站长推荐", "file": "cy/站长推荐.json", "pinned": true },
+    { "id": "online-video",   "icon": "🎞️", "label": "在线视频", "file": "cy/站点2.json" },
+    { "id": "tools",          "icon": "🧰", "label": "常用工具", "file": "cy/站点1.json" }
   ],
 
   "moreTabs": [
