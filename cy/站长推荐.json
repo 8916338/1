@@ -3,6 +3,6 @@
   "description": "精选站点，点击卡片直达。",
   "items": [
     { "name": "归零box", "url": "https:这里填入链接地址", "icon": "https://tvbox.moliys.icu/apk/logo-256.jpg", "desc": "可自选说明，壳子新势力，我想知道可以放多少个字" },
-    { "name": "华缘社", "url": "https:这里填入链接地址", "icon": "https://favicon.im/duse0.com?larger=true", "desc": "精简说明" }
+    { "name": "华缘社", "url": "https:这里填入链接地址", "icon": "图标链接", "desc": "精简说明" }
   ]
 }
