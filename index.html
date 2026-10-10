@@ -122,6 +122,18 @@ body.simple-mode #api-panel { display:block !important; }
 .dl-group.active { display:block; }
 .dl-group-title { font-size:.95rem; font-weight:600; color:#0b1e33; margin-bottom:2px; }
 .dl-group-desc { font-size:.7rem; color:#8b9eb0; margin-bottom:10px; }
+
+/* ===== 下载页二级分类 ===== */
+.dl-subgroup { margin-bottom:16px; }
+.dl-subgroup:last-child { margin-bottom:0; }
+.dl-subgroup-title {
+  font-size:.82rem; font-weight:600; color:#0b1e33;
+  line-height:1.3; margin:2px 0 8px;
+  padding-left:9px; border-left:3px solid #4a9eff;
+  word-break:break-word;
+}
+.dl-subgroup-empty { font-size:.7rem; color:#8fa3b8; padding:4px 2px; }
+
 .dl-cards { display:flex; flex-direction:column; gap:10px; width:100%; max-width:100%; overflow:hidden; }
 .download-card { display:flex; align-items:center; gap:12px; background:#fff; border:1px solid #e4ebf3; border-radius:10px; padding:10px 12px; text-decoration:none; color:inherit; transition:border-color .15s, box-shadow .15s; min-width:0; width:100%; }
 .download-card:active { border-color:#4a9eff; box-shadow:0 2px 8px rgba(74,158,255,.15); }
@@ -142,6 +154,7 @@ body.simple-mode #api-panel { display:block !important; }
   .dl-side-btn .dl-side-icon { font-size:.95rem; }
   .dl-item-icon { width:40px; height:40px; }
   .dl-item-btn { height:30px; padding:0 12px; font-size:.66rem; }
+  .dl-subgroup-title { font-size:.76rem; }
 }
 
 #more-panel { overflow-x:hidden; width:100%; }
@@ -192,6 +205,44 @@ body.simple-mode #api-panel { display:block !important; }
 #about-panel > div > div:not(#about-domains-list) { background:#fff !important; border:1px solid #e4ebf3 !important; border-radius:50px !important; padding:8px 16px !important; margin-top:8px !important; }
 #about-domains-list { background:transparent !important; padding:0 !important; border:none !important; border-radius:0 !important; margin-top:0 !important; }
 
+/* ===== 关于页 · 域名分组卡片 ===== */
+#about-domains-list .domain-group-card {
+  background:#fff; border:1px solid #e4ebf3; border-radius:12px;
+  padding:14px 16px; margin-bottom:12px; min-width:0;
+}
+#about-domains-list .domain-group-card:last-child { margin-bottom:0; }
+#about-domains-list .domain-group-head {
+  display:flex; align-items:center; gap:12px; margin-bottom:10px; min-width:0;
+}
+#about-domains-list .domain-group-avatar {
+  width:44px; height:44px; border-radius:50%; object-fit:cover; flex-shrink:0;
+  background:linear-gradient(135deg,#4a9eff,#1e6fda); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:600; font-size:.9rem;
+}
+#about-domains-list .domain-group-info { flex:1; min-width:0; }
+#about-domains-list .domain-group-name {
+  font-size:.85rem; font-weight:700; color:#0a1a2b;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+#about-domains-list .domain-group-desc {
+  display:inline-block; margin-top:4px; font-size:.62rem; font-weight:500;
+  color:#4a9eff; background:#e8f2ff; padding:2px 10px; border-radius:50px;
+  max-width:100%; overflow-wrap:break-word; word-break:break-word;
+}
+#about-domains-list .domain-line {
+  display:flex; align-items:center; gap:8px; padding:6px 14px;
+  background:#f4f8fc; border:1px solid #e0e8f0; border-radius:50px;
+  margin-top:6px; min-width:0;
+}
+#about-domains-list .domain-line .url-text {
+  font-size:.75rem; color:#2563eb; word-break:break-all;
+  overflow-wrap:break-word; line-height:1.4; flex:1; min-width:0;
+}
+#about-domains-list .domain-empty {
+  font-size:.7rem; color:#8fa3b8; padding:4px 2px;
+}
+
 .contributor-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:12px; }
 @media (min-width:600px) { .contributor-grid { grid-template-columns:repeat(3,1fr); } }
 @media (min-width:960px) { .contributor-grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); } }
@@ -236,6 +287,11 @@ body.simple-mode #api-panel { display:block !important; }
   #more-content .dl-sidebar { width:72px; gap:6px; max-height:66vh; }
   #more-content .dl-side-btn { padding:9px 3px; font-size:.66rem; border-radius:10px; }
   #more-content .dl-side-btn .dl-side-icon { font-size:.95rem; }
+  #about-domains-list .domain-group-card { padding:12px 12px; }
+  #about-domains-list .domain-group-avatar { width:38px; height:38px; font-size:.8rem; }
+  #about-domains-list .domain-group-name { font-size:.8rem; }
+  #about-domains-list .domain-line { padding:6px 10px; gap:6px; }
+  #about-domains-list .domain-line .url-text { font-size:.7rem; }
 }
 </style>
 </head>
@@ -289,7 +345,7 @@ body.simple-mode #api-panel { display:block !important; }
     <div class="tab-panel" id="about-panel">
       <div>
         <h3>🌐 备份线路域名</h3>
-        <p style="margin-bottom:6px;font-size:.76rem;color:#5a6f88">域名互为备份，任一个可用：</p>
+        <p style="margin-bottom:6px;font-size:.76rem;color:#5a6f88">按站长分组，每组域名互为备份，任一个可用：</p>
         <div id="about-domains-list"></div>
       </div>
 
@@ -481,19 +537,55 @@ async function loadConfig() {
   return SITE_CONFIG;
 }
 
-/* ===== 关于页动态渲染 ===== */
+/* ===== 关于页 · 域名分组渲染（通用模板） ===== */
 function renderAboutDomains(domains) {
   const box = document.getElementById('about-domains-list');
   if (!box) return;
+
   if (!Array.isArray(domains) || !domains.length) {
     box.innerHTML = '<div class="error-msg">暂无域名</div>';
     return;
   }
-  box.innerHTML = domains.map(d => `
-    <div style="display:flex;align-items:center;gap:8px;padding:6px 14px;background:#fff;border-radius:50px;border:1px solid #e0e6ed;margin-bottom:8px;">
-      <span style="flex:1;font-size:.75rem;color:#2563eb;word-break:break-all;">${d}</span>
-      <button class="copy-btn" data-url="${d}">复制</button>
-    </div>`).join('');
+
+  // 兼容旧格式：字符串数组 → 自动归为"默认"组
+  let groups;
+  if (typeof domains[0] === 'string') {
+    groups = [{ name: '默认线路', icon: '', desc: '域名互为备份', domains }];
+  } else {
+    groups = domains;
+  }
+
+  box.innerHTML = groups.map(g => {
+    const name = g.name || '未命名站点';
+    const desc = g.desc || '';
+    const list = Array.isArray(g.domains) ? g.domains.filter(Boolean) : [];
+
+    const avatarHtml = g.icon
+      ? `<img class="domain-group-avatar" src="${g.icon}" alt="${name}" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+         <div class="domain-group-avatar" style="display:none">${getInitials(name)}</div>`
+      : `<div class="domain-group-avatar">${getInitials(name)}</div>`;
+
+    const domainHtml = list.length
+      ? list.map(d => `
+        <div class="domain-line">
+          <span class="url-text">${d}</span>
+          <button class="copy-btn" data-url="${d}">复制</button>
+        </div>`).join('')
+      : '<div class="domain-empty">该站点暂未提供域名</div>';
+
+    return `
+      <div class="domain-group-card" data-name="${name.toLowerCase()}">
+        <div class="domain-group-head">
+          ${avatarHtml}
+          <div class="domain-group-info">
+            <div class="domain-group-name" title="${name}">${name}</div>
+            ${desc ? `<div class="domain-group-desc">${desc}</div>` : ''}
+          </div>
+        </div>
+        <div>${domainHtml}</div>
+      </div>`;
+  }).join('');
 }
 
 function renderAboutText(about) {
@@ -840,17 +932,20 @@ async function renderDownloads(force) {
       const raw = await res.text();
       const cleaned = raw.replace(/[\u201c\u201d]/g, '"').replace(/[\u2018\u2019]/g, "'").replace(/：/g, ':').replace(/，/g, ',');
       const data = JSON.parse(cleaned);
-      let cards = [];
+      let groups = [];
       const arr = data.list || data;
       if (Array.isArray(arr)) {
         arr.forEach(group => {
-          if (group && Array.isArray(group.list)) group.list.forEach(i => cards.push(i));
-          else cards.push(group);
+          if (group && Array.isArray(group.list)) {
+            groups.push({ name: group.name || '', list: group.list });
+          } else if (group) {
+            groups.push({ name: '', list: [group] });
+          }
         });
       }
-      dlCache.set(src.url, { src, cards });
+      dlCache.set(src.url, { src, groups });
     } catch (e) {
-      dlCache.set(src.url, { src, cards: [], error: e.message });
+      dlCache.set(src.url, { src, groups: [], error: e.message });
     }
   }));
 
@@ -864,28 +959,38 @@ function showDownloadGroup(key) {
   if (!body) return;
   const entry = dlCache.get(key);
   if (!entry) { body.innerHTML = '<div class="loading">⏳ 加载中...</div>'; return; }
-  const { src, cards, error } = entry;
+  const { src, groups, error } = entry;
   if (error) { body.innerHTML = `<div class="error-msg">❌ ${src.name} 加载失败：${error}</div>`; return; }
-  if (!cards.length) { body.innerHTML = `<div class="error-msg">⚠️ ${src.name} 暂无资源</div>`; return; }
+
+  const total = (groups || []).reduce((n, g) => n + ((g.list || []).length), 0);
+  if (!total) { body.innerHTML = `<div class="error-msg">⚠️ ${src.name} 暂无资源</div>`; return; }
 
   const title = src.name ? `<div class="dl-group-title">${src.name}</div>` : '';
   const desc = src.description ? `<div class="dl-group-desc">${src.description}</div>` : '';
-  const cardsHtml = cards.map(i => {
-    const ph = (i.name || '?').slice(0, 1).toUpperCase();
-    const iconImg = i.icon
-      ? `<img src="${i.icon}" alt="${i.name}" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex';">`
-      : '';
-    return `
-    <a class="download-card" href="${i.url || '#'}" target="_blank" rel="noopener noreferrer" data-name="${(i.name || '').toLowerCase()}">
-      <span class="dl-item-icon">${iconImg}<span class="site-ph" style="display:${i.icon ? 'none' : 'flex'}">${ph}</span></span>
-      <span class="dl-item-info">
-        <span class="dl-item-name">${i.name || ''}</span>
-        ${i.version ? `<span class="dl-item-desc">${i.version}</span>` : ''}
-      </span>
-      <span class="dl-item-btn">⬇ 下载</span>
-    </a>`;
+
+  const groupsHtml = (groups || []).map(g => {
+    const list = g.list || [];
+    if (!list.length) return '';
+    const cardsHtml = list.map(i => {
+      const ph = (i.name || '?').slice(0, 1).toUpperCase();
+      const iconImg = i.icon
+        ? `<img src="${i.icon}" alt="${i.name}" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex';">`
+        : '';
+      return `
+      <a class="download-card" href="${i.url || '#'}" target="_blank" rel="noopener noreferrer" data-name="${(i.name || '').toLowerCase()}">
+        <span class="dl-item-icon">${iconImg}<span class="site-ph" style="display:${i.icon ? 'none' : 'flex'}">${ph}</span></span>
+        <span class="dl-item-info">
+          <span class="dl-item-name">${i.name || ''}</span>
+          ${i.version ? `<span class="dl-item-desc">${i.version}</span>` : ''}
+        </span>
+        <span class="dl-item-btn">⬇ 下载</span>
+      </a>`;
+    }).join('');
+    const gTitle = g.name ? `<div class="dl-subgroup-title">${g.name}</div>` : '';
+    return `<div class="dl-subgroup">${gTitle}<div class="dl-cards">${cardsHtml}</div></div>`;
   }).join('');
-  body.innerHTML = `<div class="dl-group active">${title}${desc}<div class="dl-cards">${cardsHtml}</div></div>`;
+
+  body.innerHTML = `<div class="dl-group active">${title}${desc}${groupsHtml}</div>`;
 }
 
 /* ===== 导航 ===== */
