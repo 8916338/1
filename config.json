@@ -10,9 +10,9 @@
   "about": {
     "domains": [
       {
-        "name": "误道者",
+        "name": "误道者站点",
         "icon": "vip/jueson.jpg",
-        "desc": "主站 · 一线稳定线路",
+        "desc": "",
         "domains": [
           "https://0.wudaozhe.net",
           "https://0.12yue.de5.net",
@@ -21,9 +21,9 @@
         ]
       },
       {
-        "name": "沫离",
+        "name": "沫离站点",
         "icon": "vip/沫离.jpg",
-        "desc": "镜像备用站 · 弹幕增强",
+        "desc": "",
         "domains": [
           "https://tvbox.moliys.icu"
         ]
