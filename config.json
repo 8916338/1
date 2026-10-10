@@ -21,11 +21,46 @@
         ]
       },
       {
-        "name": "沫离站点",
-        "icon": "vip/沫离.jpg",
+        "name": "雪衣玉龙站点",
+        "icon": "vip/雪衣玉龙.jpg",
         "desc": "",
         "domains": [
-          "https://tvbox.moliys.icu"
+          "https://ym.120733.xyz",
+          "https://4.wudaozhe.net"
+        ]
+      },
+      {
+        "name": "Liujun站点",
+        "icon": "vip/刘军.jpg",
+        "desc": "",
+        "domains": [
+          "https://liujin86.ccwu.cc",
+          "https://8.wudaozhe.net"
+        ]
+      },
+      {
+        "name": "第五站点",
+        "icon": "vip/第五.jpg",
+        "desc": "",
+        "domains": [
+          "https://tvthaox.cc.cd"
+        ]
+      },
+      {
+        "name": "祥子站点",
+        "icon": "vip/祥子.jpg",
+        "desc": "",
+        "domains": [
+          "https://nxz.de5.net",
+          "https://8.wudaozhe.net"
+        ]
+      },
+      {
+        "name": "第七站点",
+        "icon": "vip/第七.jpg",
+        "desc": "",
+        "domains": [
+          "https://tvbox-api.luca.dpdns.org"
         ]
       }
     ],
