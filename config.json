@@ -25,19 +25,7 @@
         "icon": "vip/沫离.jpg",
         "desc": "镜像备用站 · 弹幕增强",
         "domains": [
-          "https://tvbox.moliys.icu",
-          "https://ym.120733.xyz"
-        ]
-      },
-      {
-        "name": "简约风<格>",
-        "icon": "vip/简约风格.jpg",
-        "desc": "推广分发站点",
-        "domains": [
-          "https://liujin86.ccwu.cc",
-          "https://tvthaox.cc.cd",
-          "https://nxz.de5.net",
-          "https://tvbox-api.luca.dpdns.org"
+          "https://tvbox.moliys.icu"
         ]
       }
     ],
