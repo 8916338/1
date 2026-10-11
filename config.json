@@ -10,9 +10,9 @@
   "about": {
     "domains": [
       {
-        "name": "误道者站点",
+        "name": "误道者",
         "icon": "vip/jueson.jpg",
-        "desc": "",
+        "desc": "主站 · 一线稳定线路",
         "domains": [
           "https://0.wudaozhe.net",
           "https://0.12yue.de5.net",
@@ -21,45 +21,22 @@
         ]
       },
       {
-        "name": "雪衣玉龙站点",
-        "icon": "vip/雪衣玉龙.jpg",
-        "desc": "",
+        "name": "沫离",
+        "icon": "vip/沫离.jpg",
+        "desc": "镜像备用站 · 弹幕增强",
         "domains": [
-          "https://ym.120733.xyz",
-          "https://4.wudaozhe.net"
+          "https://tvbox.moliys.icu",
+          "https://ym.120733.xyz"
         ]
       },
       {
-        "name": "Liujun站点",
-        "icon": "vip/刘军.jpg",
-        "desc": "",
+        "name": "简约风<格>",
+        "icon": "https://favicon.im/ccwu.cc?larger=true",
+        "desc": "推广分发站点",
         "domains": [
           "https://liujin86.ccwu.cc",
-          "https://8.wudaozhe.net"
-        ]
-      },
-      {
-        "name": "第五站点",
-        "icon": "vip/第五.jpg",
-        "desc": "",
-        "domains": [
-          "https://tvthaox.cc.cd"
-        ]
-      },
-      {
-        "name": "祥子站点",
-        "icon": "vip/祥子.jpg",
-        "desc": "",
-        "domains": [
+          "https://tvthaox.cc.cd",
           "https://nxz.de5.net",
-          "https://6.wudaozhe.net"
-        ]
-      },
-      {
-        "name": "第七站点",
-        "icon": "vip/第七.jpg",
-        "desc": "",
-        "domains": [
           "https://tvbox-api.luca.dpdns.org"
         ]
       }
@@ -72,7 +49,7 @@
     "contributors": [
       { "name": "误道者", "role": "站长 / 资源整理", "desc": "站点发起与接口资源整理", "avatar": "vip/jueson.jpg" },
       { "name": "沫离", "role": "弹幕分页", "desc": "贡献弹幕书源音乐源漫画源等模块", "avatar": "vip/沫离.jpg" },
-      { "name": "简约风<格>", "role": "推广贡献", "desc": "将本网页内嵌 APP 进行推广分发", "avatar": "vip/简约风格.jpg" }
+      { "name": "简约风<格>", "role": "推广贡献", "desc": "将本网页内嵌 APP 进行推广分发", "avatar": "https://favicon.im/ccwu.cc?larger=true" }
     ]
   },
 
@@ -135,27 +112,27 @@
   },
 
   "downloadSources": [
-    { "name": "菠菜园",   "url": "ry/菠菜园下载.json",   "description": "整理者：误道者" },
-    { "name": "奇奇副本", "url": "ry/奇奇副本.json",     "description": "整理者：误道者" },
-    { "name": "无忧",     "url": "ry/无忧下载.json",     "description": "云星" },
-    { "name": "潇洒",     "url": "ry/潇洒下载.json",     "description": "潇洒" },
-    { "name": "柒豪下载", "url": "ry/柒豪下载.json",     "description": "" },
-    { "name": "应用下载", "url": "ry/应用市场二.json",   "description": "" },
-    { "name": "应用市场", "url": "ry/应用市场一.json",   "description": "" }
+    { "name": "菠菜园",   "url": "ry/菠菜园下载.json",   "icon": "🥬", "description": "整理者：误道者" },
+    { "name": "奇奇副本", "url": "ry/奇奇副本.json",     "icon": "🎬", "description": "整理者：误道者" },
+    { "name": "无忧",     "url": "ry/无忧下载.json",     "icon": "☁️", "description": "云星" },
+    { "name": "潇洒",     "url": "ry/潇洒下载.json",     "icon": "🕶️", "description": "潇洒" },
+    { "name": "柒豪下载", "url": "ry/柒豪下载.json",     "icon": "📦", "description": "" },
+    { "name": "应用下载", "url": "ry/应用市场二.json",   "icon": "📱", "description": "" },
+    { "name": "应用市场", "url": "ry/应用市场一.json",   "icon": "🛒", "description": "" }
   ],
 
   "videoTabs": [
-    { "id": "shop-recommend", "icon": "⭐", "label": "站长推荐", "file": "cy/站长推荐.json", "pinned": true },
-    { "id": "online-video",   "icon": "🎞️", "label": "在线视频", "file": "cy/站点2.json" },
-    { "id": "tools",          "icon": "🧰", "label": "常用工具", "file": "cy/站点1.json" }
+    { "id": "shop-recommend", "icon": "⭐", "label": "店长推荐", "file": "cy/站点2.json", "pinned": true, "type": "online" },
+    { "id": "online-video",   "icon": "🎞️", "label": "在线视频", "file": "cy/站点2.json", "type": "online" },
+    { "id": "tools",          "icon": "🧰", "label": "常用工具", "file": "cy/站点1.json", "type": "tools" }
   ],
 
   "moreTabs": [
-    { "id": "danmu",          "icon": "💬", "label": "弹幕接口", "file": "cy/弹幕.json" },
-    { "id": "book-source",    "icon": "📚", "label": "书源",     "file": "cy/书源.json" },
-    { "id": "comic-source",   "icon": "📖", "label": "漫画源",   "file": "cy/漫画源.json" },
-    { "id": "music-source",   "icon": "🎵", "label": "音源",     "file": "cy/音源.json" },
-    { "id": "general-source", "icon": "🧩", "label": "通用模板", "file": "cy/模板.json" }
+    { "id": "danmu",          "icon": "💬", "label": "弹幕接口", "file": "cy/弹幕.json",     "type": "api" },
+    { "id": "book-source",    "icon": "📚", "label": "书源",     "file": "cy/书源.json",     "type": "api" },
+    { "id": "comic-source",   "icon": "📖", "label": "漫画源",   "file": "cy/漫画源.json",   "type": "api" },
+    { "id": "music-source",   "icon": "🎵", "label": "音源",     "file": "cy/音源.json",     "type": "api" },
+    { "id": "general-source", "icon": "🧩", "label": "通用模板", "file": "cy/模板.json",     "type": "api" }
   ],
 
   "customApis": [
