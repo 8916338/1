@@ -1,0 +1,33 @@
+[
+  {
+    "name": "误道者",
+    "icon": "vip/jueson.jpg",
+    "desc": "主站 · 一线稳定线路",
+    "domains": [
+      "https://0.wudaozhe.net",
+      "https://0.12yue.de5.net",
+      "https://0.cdz.qzz.io",
+      "https://0.wdzb.eu.cc"
+    ]
+  },
+  {
+    "name": "沫离",
+    "icon": "vip/沫离.jpg",
+    "desc": "镜像备用站 · 弹幕增强",
+    "domains": [
+      "https://tvbox.moliys.icu",
+      "https://ym.120733.xyz"
+    ]
+  },
+  {
+    "name": "简约风<格>",
+    "icon": "https://favicon.im/ccwu.cc?larger=true",
+    "desc": "推广分发站点",
+    "domains": [
+      "https://liujin86.ccwu.cc",
+      "https://tvthaox.cc.cd",
+      "https://nxz.de5.net",
+      "https://tvbox-api.luca.dpdns.org"
+    ]
+  }
+]
