@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
-  <title>海量接口搬运备份</title>
+  <title>海量接口搬运备份a</title>
   <link rel="icon" type="image/jpeg" href="vip/jueson.jpg">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1436,13 +1436,13 @@
       if (site.logo) headerLogo.src = site.logo;
       headerTitle.textContent = site.title || '海量接口搬运备份';
 
-      // 副标题：固定为下面这段 HTML（不再依赖 config）
-      headerSubtitle.innerHTML = `
-        备用数据源，防屏不迷路<br>
-        <a class="qq-link" href="https://0.wudaozhe.net/qq群" target="_blank" rel="noopener noreferrer">
-          猛戳这里加入QQ群: <span style="color:#00C853;">点击</span>
-        </a>
-      `;
+// 副标题：从 config 读取
+headerSubtitle.innerHTML = `
+  ${site.subtitle || '备用数据源，防屏不迷路'}<br>
+  <a class="qq-link" href="${site.qqUrl || '#'}" target="_blank" rel="noopener noreferrer">
+    ${site.qqText || '猛戳这里加入QQ群: '}<span style="color:#00C853;">${site.qqHighlight || '点击'}</span>
+  </a>
+`;
 
       if (site.footer) footerText.textContent = site.footer;
 
