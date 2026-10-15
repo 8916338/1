@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
-  <title>海量接口搬运备份a</title>
+  <title>海量接口搬运备份</title>
   <link rel="icon" type="image/jpeg" href="vip/jueson.jpg">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -698,7 +698,7 @@
     }
     #about-panel h3 { font-size: .9rem !important; margin-bottom: 10px !important; }
     #about-panel p, #about-panel li { font-size: .75rem !important; line-height: 1.7 !important; }
-    #about-panel > div > div:not(#about-domains-list):not(#about-quick-links) {
+    #about-panel > div > div:not(#about-domains-list) {
       background: #fff !important;
       border: 1px solid #e4ebf3 !important;
       border-radius: 50px !important;
@@ -868,14 +868,14 @@
       word-break: break-word;
     }
 
-    /* ===== 关于页 · 快捷图标（QQ / 微信 / TG / GitHub） ===== */
+    /* ===== 全局 · 快捷图标（QQ / 微信 / TG / GitHub），显示在所有页面 footer 上方 ===== */
     #about-quick-links {
       display: flex !important;
       justify-content: center;
       align-items: flex-start;
       gap: 26px;
       flex-wrap: wrap;
-      margin-top: 18px !important;
+      margin: 26px 0 4px !important;
       background: transparent !important;
       border: none !important;
       border-radius: 0 !important;
@@ -924,7 +924,7 @@
       white-space: nowrap;
     }
 
-    /* ===== 关于页 · 赞赏码弹窗 ===== */
+    /* ===== 赞赏码弹窗 ===== */
     .zsm-modal {
       position: fixed;
       inset: 0;
@@ -1045,7 +1045,7 @@
       #about-domains-list .domain-group-name { font-size: .8rem; }
       #about-domains-list .domain-line { padding: 6px 10px; gap: 6px; }
       #about-domains-list .domain-line .url-text { font-size: .7rem; }
-      #about-quick-links { gap: 18px; }
+      #about-quick-links { gap: 18px; margin: 18px 0 2px !important; }
       .quick-icon { width: 50px; height: 50px; }
       .quick-icon-text { font-size: 2rem; }
       .zsm-modal-panel { max-width: 300px; }
@@ -1132,12 +1132,12 @@
           <ul style="padding-left: 16px;">
             <li id="about-declaration" style="font-size: .76rem; color: #5a6f88; line-height: 1.6;"></li>
           </ul>
-
-          <!-- 快捷图标：QQ群 / 微信赞赏 / TG群组 / GitHub（配置见 config.json → about.quickLinks） -->
-          <div id="about-quick-links"></div>
         </div>
       </div>
     </div>
+
+    <!-- 快捷图标：QQ群 / 微信赞赏 / TG群组 / GitHub（配置见 config.json → about.quickLinks），全页面常驻 -->
+    <div id="about-quick-links"></div>
 
     <footer class="page-footer">
       <p id="footer-text"></p>
@@ -1242,7 +1242,7 @@
     }
 
     /* ============================================================
-       关于页 · 快捷图标（SVG 文件存放于 vip 文件夹，路径来自 config）
+       快捷图标（SVG 文件存放于 vip 文件夹，路径来自 config）
        ============================================================ */
     /* 旧配置兼容：键名 → vip 文件夹下的 svg 文件路径 */
     const QUICK_ICON_FILE_MAP = {
@@ -1436,13 +1436,13 @@
       if (site.logo) headerLogo.src = site.logo;
       headerTitle.textContent = site.title || '海量接口搬运备份';
 
-// 副标题：从 config 读取
-headerSubtitle.innerHTML = `
-  ${site.subtitle || '备用数据源，防屏不迷路'}<br>
-  <a class="qq-link" href="${site.qqUrl || '#'}" target="_blank" rel="noopener noreferrer">
-    ${site.qqText || '猛戳这里加入QQ群: '}<span style="color:#00C853;">${site.qqHighlight || '点击'}</span>
-  </a>
-`;
+      // 副标题：从 config 读取
+      headerSubtitle.innerHTML = `
+        ${site.subtitle || '备用数据源，防屏不迷路'}<br>
+        <a class="qq-link" href="${site.qqUrl || '#'}" target="_blank" rel="noopener noreferrer">
+          ${site.qqText || '猛戳这里加入QQ群: '}<span style="color:#00C853;">${site.qqHighlight || '点击'}</span>
+        </a>
+      `;
 
       if (site.footer) footerText.textContent = site.footer;
 
