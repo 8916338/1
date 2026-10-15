@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
-  <title>海量接口搬运备份</title>
+  <title>海量接口搬运备份1</title>
   <link rel="icon" type="image/jpeg" href="vip/jueson.jpg">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -403,7 +403,6 @@
     .dl-group-title { font-size: .95rem; font-weight: 600; color: #0b1e33; margin-bottom: 2px; }
     .dl-group-desc { font-size: .7rem; color: #8b9eb0; margin-bottom: 10px; }
 
-    /* ===== 下载页二级分类 ===== */
     .dl-subgroup { margin-bottom: 16px; }
     .dl-subgroup:last-child { margin-bottom: 0; }
     .dl-subgroup-title {
@@ -652,7 +651,6 @@
     }
     .tool-chip .tool-icon img { width: 100%; height: 100%; border-radius: 4px; object-fit: cover; }
 
-    /* ===== 通用图标容器（支持 img 或 emoji/文字） ===== */
     .icon-box {
       display: inline-flex;
       align-items: center;
@@ -662,7 +660,6 @@
     }
     .icon-box img { width: 100%; height: 100%; object-fit: contain; border-radius: inherit; }
 
-    /* ===== 快链 · 置顶固定按钮（金色主题） ===== */
     .vd-side-btn.vd-pinned {
       border-color: #f5a623;
       color: #f5a623;
@@ -698,7 +695,7 @@
     }
     #about-panel h3 { font-size: .9rem !important; margin-bottom: 10px !important; }
     #about-panel p, #about-panel li { font-size: .75rem !important; line-height: 1.7 !important; }
-    #about-panel > div > div:not(#about-domains-list):not(#about-quick-links) {
+    #about-panel > div > div:not(#about-domains-list) {
       background: #fff !important;
       border: 1px solid #e4ebf3 !important;
       border-radius: 50px !important;
@@ -713,7 +710,6 @@
       margin-top: 0 !important;
     }
 
-    /* ===== 关于页 · 域名分组卡片 ===== */
     #about-domains-list .domain-group-card {
       background: #fff;
       border: 1px solid #e4ebf3;
@@ -868,14 +864,14 @@
       word-break: break-word;
     }
 
-    /* ===== 关于页 · 快捷图标（QQ / 微信 / TG / GitHub） ===== */
+    /* ===== footer 内的快捷图标（QQ / 微信 / TG / GitHub），全页面常驻 ===== */
     #about-quick-links {
       display: flex !important;
       justify-content: center;
       align-items: flex-start;
       gap: 26px;
       flex-wrap: wrap;
-      margin-top: 18px !important;
+      margin: 0 0 8px !important;
       background: transparent !important;
       border: none !important;
       border-radius: 0 !important;
@@ -924,7 +920,6 @@
       white-space: nowrap;
     }
 
-    /* ===== 关于页 · 赞赏码弹窗 ===== */
     .zsm-modal {
       position: fixed;
       inset: 0;
@@ -1045,7 +1040,7 @@
       #about-domains-list .domain-group-name { font-size: .8rem; }
       #about-domains-list .domain-line { padding: 6px 10px; gap: 6px; }
       #about-domains-list .domain-line .url-text { font-size: .7rem; }
-      #about-quick-links { gap: 18px; }
+      #about-quick-links { gap: 18px; margin: 0 0 6px !important; }
       .quick-icon { width: 50px; height: 50px; }
       .quick-icon-text { font-size: 2rem; }
       .zsm-modal-panel { max-width: 300px; }
@@ -1132,14 +1127,14 @@
           <ul style="padding-left: 16px;">
             <li id="about-declaration" style="font-size: .76rem; color: #5a6f88; line-height: 1.6;"></li>
           </ul>
-
-          <!-- 快捷图标：QQ群 / 微信赞赏 / TG群组 / GitHub（配置见 config.json → about.quickLinks） -->
-          <div id="about-quick-links"></div>
         </div>
       </div>
     </div>
 
+    <!-- ====== 页脚（快捷图标 + 版权小字） ====== -->
     <footer class="page-footer">
+      <!-- 快捷图标：QQ群 / 微信赞赏 / TG群组 / GitHub（配置见 config.json → about.quickLinks），全页面常驻，位于 footer 小字上方 -->
+      <div id="about-quick-links"></div>
       <p id="footer-text"></p>
     </footer>
   </div>
@@ -1169,10 +1164,6 @@
   </div>
 
   <script>
-    /* ============================================================
-       全部逻辑从 config.json 读取，HTML 只留空壳
-       ============================================================ */
-
     const MODE_KEY = 'site_mode';
     const TAB_KEY  = 'current_tab';
 
@@ -1207,9 +1198,6 @@
     document.body.className = currentMode + '-mode';
     updateBtnText();
 
-    /* ============================================================
-       图标智能渲染工具
-       ============================================================ */
     function isImageIcon(icon) {
       if (!icon || typeof icon !== 'string') return false;
       const s = icon.trim();
@@ -1241,10 +1229,6 @@
       }
     }
 
-    /* ============================================================
-       关于页 · 快捷图标（SVG 文件存放于 vip 文件夹，路径来自 config）
-       ============================================================ */
-    /* 旧配置兼容：键名 → vip 文件夹下的 svg 文件路径 */
     const QUICK_ICON_FILE_MAP = {
       qq:       'vip/icon-qq.svg',
       wechat:   'vip/icon-wechat.svg',
@@ -1257,19 +1241,10 @@
       const val = String(icon || '').trim();
       const c = color || '#4a9eff';
 
-      if (!val) {
-        return `<span class="quick-icon quick-icon-text" style="color:${c}">🔗</span>`;
-      }
-      // 1) 直接传入图片路径（含 vip/icon-*.svg）
-      if (isImageIcon(val)) {
-        return `<img class="quick-icon" src="${val}" alt="" loading="lazy">`;
-      }
-      // 2) 兼容旧配置键名
+      if (!val) return `<span class="quick-icon quick-icon-text" style="color:${c}">🔗</span>`;
+      if (isImageIcon(val)) return `<img class="quick-icon" src="${val}" alt="" loading="lazy">`;
       const key = val.toLowerCase();
-      if (QUICK_ICON_FILE_MAP[key]) {
-        return `<img class="quick-icon" src="${QUICK_ICON_FILE_MAP[key]}" alt="" loading="lazy">`;
-      }
-      // 3) emoji / 文字
+      if (QUICK_ICON_FILE_MAP[key]) return `<img class="quick-icon" src="${QUICK_ICON_FILE_MAP[key]}" alt="" loading="lazy">`;
       return `<span class="quick-icon quick-icon-text" style="color:${c}">${val}</span>`;
     }
 
@@ -1300,7 +1275,6 @@
       });
     }
 
-    /* ===== 赞赏码弹窗 ===== */
     function openQuickModal(item) {
       const modal = document.getElementById('zsmModal');
       const img   = document.getElementById('zsmModalImg');
@@ -1347,9 +1321,6 @@
       });
     })();
 
-    /* ============================================================
-       外部资源智能解析
-       ============================================================ */
     async function resolveExternal(value, fallback) {
       if (Array.isArray(value) || (value && typeof value === 'object')) return value;
       if (typeof value === 'string' && value.trim()) {
@@ -1365,7 +1336,6 @@
       return fallback;
     }
 
-    /* ===== 全局复制 ===== */
     document.addEventListener('click', function (e) {
       const copyBtn = e.target.closest('.copy-btn');
       if (!copyBtn) return;
@@ -1401,7 +1371,6 @@
       }
     });
 
-    /* ===== 工具 ===== */
     function getTopItem(rotateItems) {
       if (!rotateItems || !rotateItems.length) return null;
       if (rotateItems.length === 1) return rotateItems[0];
@@ -1425,7 +1394,6 @@
       return res.json();
     }
 
-    /* ===== 配置加载 ===== */
     async function loadConfig() {
       if (SITE_CONFIG) return SITE_CONFIG;
       const res = await fetch('config.json?t=' + Date.now() + '&r=' + Math.random(), { cache: 'no-store' });
@@ -1436,11 +1404,10 @@
       if (site.logo) headerLogo.src = site.logo;
       headerTitle.textContent = site.title || '海量接口搬运备份';
 
-      // 副标题：固定为下面这段 HTML（不再依赖 config）
       headerSubtitle.innerHTML = `
-        备用数据源，防屏不迷路<br>
-        <a class="qq-link" href="https://0.wudaozhe.net/qq群" target="_blank" rel="noopener noreferrer">
-          猛戳这里加入QQ群: <span style="color:#00C853;">点击</span>
+        ${site.subtitle || '备用数据源，防屏不迷路'}<br>
+        <a class="qq-link" href="${site.qqUrl || '#'}" target="_blank" rel="noopener noreferrer">
+          ${site.qqText || '猛戳这里加入QQ群: '}<span style="color:#00C853;">${site.qqHighlight || '点击'}</span>
         </a>
       `;
 
@@ -1499,7 +1466,6 @@
       return SITE_CONFIG;
     }
 
-    /* ===== 关于页 · 域名分组渲染 ===== */
     function renderAboutDomains(domains) {
       const box = document.getElementById('about-domains-list');
       if (!box) return;
@@ -1555,7 +1521,6 @@
       if (dec && about.declaration) dec.textContent = about.declaration;
       if (note && about.contributorsNote) note.textContent = about.contributorsNote;
 
-      // 快捷图标（QQ群 / 微信赞赏 / TG群组 / GitHub），配置见 about.quickLinks
       renderQuickLinks(about.quickLinks || []);
     }
 
@@ -1587,9 +1552,6 @@
       }).join('');
     }
 
-    /* ============================================================
-       通用渲染：online / tools / api
-       ============================================================ */
     function renderOnlineItem(item) {
       const name = item.name || '';
       const url  = item.url || '#';
@@ -1606,7 +1568,6 @@
           iconHtml = `<span class="site-ph" style="display:flex;font-size:1.4rem">${item.icon}</span>`;
         }
       } else {
-        // 不再请求 favicon.im / icon.horse 等外部服务，避免出现第三方（如 Cloudflare）图标
         iconHtml = `<span class="site-ph" style="display:flex">${ph}</span>`;
       }
 
@@ -1670,7 +1631,6 @@
       </div>`;
     }
 
-    /* ===== 快链面板 ===== */
     async function renderVideo() {
       const container = document.getElementById('video-content');
       if (!container) return;
@@ -1726,7 +1686,6 @@
       });
     }
 
-    /* ===== 更多面板 ===== */
     async function renderMore() {
       const container = document.getElementById('more-content');
       if (!container) return;
@@ -1777,7 +1736,6 @@
       });
     }
 
-    /* ===== 点播 ===== */
     async function fetchListText() {
       if (rawListText !== null) return rawListText;
       const file = (SITE_CONFIG && SITE_CONFIG.sourceFiles && SITE_CONFIG.sourceFiles.list) || 'list.txt';
@@ -1868,7 +1826,6 @@
       }
     }
 
-    /* ===== 直播 ===== */
     async function fetchLiveText() {
       if (rawLiveText !== null) return rawLiveText;
       const file = (SITE_CONFIG && SITE_CONFIG.sourceFiles && SITE_CONFIG.sourceFiles.live) || 'livelist.txt';
@@ -1926,7 +1883,6 @@
       });
     }
 
-    /* ===== 下载 ===== */
     let dlCache = new Map();
     let dlCurrentGroup = null;
 
@@ -2033,7 +1989,6 @@
       body.innerHTML = `<div class="dl-group active">${title}${desc}${groupsHtml}</div>`;
     }
 
-    /* ===== 导航 ===== */
     function renderTabs() {
       if (!TABS.length) return;
       navTabs.innerHTML = TABS.map(t =>
@@ -2072,7 +2027,6 @@
       if (tabId === 'more') renderMore();
     }
 
-    /* ===== 搜索 ===== */
     function globalSearch() {
       const kw = (searchBox.value || '').toLowerCase().trim();
       const list = (currentMode === 'simple')
@@ -2118,7 +2072,6 @@
       }
     });
 
-    /* ===== 启动 ===== */
     (async function init() {
       try {
         await loadConfig();
