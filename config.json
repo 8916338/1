@@ -107,9 +107,9 @@
   "tabs": [
     { "id": "api",      "label": "点播" },
     { "id": "live",     "label": "直播" },
-    { "id": "download", "label": "下载", "data": "downloadSources", "defaultType": "download" },
-    { "id": "video",    "label": "快链", "data": "videoTabs", "defaultType": "api" },
-    { "id": "more",     "label": "更多", "data": "moreTabs", "defaultType": "api" },
+    { "id": "download", "label": "下载", "data": "downloadSources", "defaultType": "more" },
+    { "id": "video",    "label": "快链", "data": "videoTabs", "defaultType": "more" },
+    { "id": "more",     "label": "更多", "data": "moreTabs", "defaultType": "more" },
     { "id": "about",    "label": "关于" }
   ],
 
