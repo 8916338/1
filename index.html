@@ -14,52 +14,61 @@
   
   <script>
     // =========================================================
-    // 弹窗开关与冷却时间设置（直接在这里修改）
+    // 拦截逻辑：读取 config.json 的开关与冷却时间
     // =========================================================
-    const ENABLE_GUIDE = true;           // 开关：true 开启弹窗，false 关闭弹窗
-    const GUIDE_COOLDOWN_MINUTES = 2;    // 冷却时间：单位分钟
-
     (function checkGuide() {
-      if (!ENABLE_GUIDE) return; 
+      fetch('config.json?t=' + Date.now(), { cache: 'no-store' })
+        .then(res => res.json())
+        .then(cfg => {
+          const siteCfg = cfg.site || {};
+          
+          // 开关，默认关闭弹窗以防万一
+          const guideEnabled = siteCfg.enableGuide === true;
+          if (!guideEnabled) return; 
 
-      const STATE_KEY = 'guide_prompt_state';
-      let state = null;
-      try { state = JSON.parse(localStorage.getItem(STATE_KEY)); } catch(e) {}
-      
-      const now = Date.now();
-      const DAY_MS = 24 * 60 * 60 * 1000;
-      const COOLDOWN_MS = GUIDE_COOLDOWN_MINUTES * 60 * 1000;
+          // 冷却时间，默认 30 分钟
+          const cooldownMin = siteCfg.guideCooldown !== undefined ? Number(siteCfg.guideCooldown) : 30;
+          const COOLDOWN_MS = cooldownMin * 60 * 1000;
 
-      if (!state) {
-        // 首次访问，强行带时间戳跳转，防止缓存
-        window.location.replace('guide.html?t=' + Date.now());
-        return;
-      }
+          const STATE_KEY = 'guide_prompt_state';
+          let state = null;
+          try { state = JSON.parse(localStorage.getItem(STATE_KEY)); } catch(e) {}
+          
+          const now = Date.now();
+          const DAY_MS = 24 * 60 * 60 * 1000;
 
-      // 冷却期内直接放行
-      if (now - state.lastShow < COOLDOWN_MS) {
-        return; 
-      }
+          if (!state) {
+            // 首次访问，跳转并加上时间戳防缓存
+            window.location.replace('guide.html?t=' + Date.now());
+            return;
+          }
 
-      const diffDays = (now - state.lastShow) / DAY_MS;
-      let needGuide = false;
+          // 冷却期判断
+          if (now - state.lastShow < COOLDOWN_MS) {
+            return; 
+          }
 
-      if (state.phase === 'daily') {
-        if (state.count < 3 || diffDays >= 1) needGuide = true;
-      } else if (state.phase === 'weekly') {
-        if (state.count < 3 || diffDays >= 7) needGuide = true;
-      } else if (state.phase === 'monthly') {
-        if (state.count < 3 || diffDays >= 30) needGuide = true;
-      }
+          const diffDays = (now - state.lastShow) / DAY_MS;
+          let needGuide = false;
 
-      if (needGuide) {
-        // 强行带时间戳跳转
-        window.location.replace('guide.html?t=' + Date.now());
-      }
+          if (state.phase === 'daily') {
+            if (state.count < 3 || diffDays >= 1) needGuide = true;
+          } else if (state.phase === 'weekly') {
+            if (state.count < 3 || diffDays >= 7) needGuide = true;
+          } else if (state.phase === 'monthly') {
+            if (state.count < 3 || diffDays >= 30) needGuide = true;
+          }
+
+          if (needGuide) {
+            window.location.replace('guide.html?t=' + Date.now());
+          }
+        })
+        .catch(e => console.warn('检查弹窗状态失败，跳过拦截', e));
     })();
   </script>
 
   <style>
+    /* 原样保留你的样式 */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { height: 100%; }
     body {
