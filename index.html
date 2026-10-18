@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
+  
+  <!-- 【核心防缓存】强制浏览器每次请求最新数据 -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <title>海量接口搬运备份</title>
   <link rel="icon" type="image/jpeg" href="vip/jueson.jpg">
   
@@ -11,10 +17,10 @@
     // 弹窗开关与冷却时间设置（直接在这里修改）
     // =========================================================
     const ENABLE_GUIDE = true;           // 开关：true 开启弹窗，false 关闭弹窗
-    const GUIDE_COOLDOWN_MINUTES = 10;    // 冷却时间：单位分钟（填 0 则刷新就触发判断）
+    const GUIDE_COOLDOWN_MINUTES = 2;    // 冷却时间：单位分钟
 
     (function checkGuide() {
-      if (!ENABLE_GUIDE) return; // 开关关闭则直接跳过
+      if (!ENABLE_GUIDE) return; 
 
       const STATE_KEY = 'guide_prompt_state';
       let state = null;
@@ -25,12 +31,12 @@
       const COOLDOWN_MS = GUIDE_COOLDOWN_MINUTES * 60 * 1000;
 
       if (!state) {
-        // 首次访问，直接跳转
-        window.location.replace('guide.html');
+        // 首次访问，强行带时间戳跳转，防止缓存
+        window.location.replace('guide.html?t=' + Date.now());
         return;
       }
 
-      // 检查冷却时间（避免连续弹窗）
+      // 冷却期内直接放行
       if (now - state.lastShow < COOLDOWN_MS) {
         return; 
       }
@@ -47,7 +53,8 @@
       }
 
       if (needGuide) {
-        window.location.replace('guide.html');
+        // 强行带时间戳跳转
+        window.location.replace('guide.html?t=' + Date.now());
       }
     })();
   </script>
