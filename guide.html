@@ -351,13 +351,21 @@
     function closeGuide() {
       if (cdTimer) clearInterval(cdTimer);
 
+      // 【核心终极修复】校验并且立刻销毁行程锚点
+      const pendingTime = sessionStorage.getItem('guide_pending_time');
+      if (!pendingTime) {
+        // 如果没有锚点，说明是浏览器后退等操作进入的缓存页面，拒绝计数直接踢走
+        window.location.replace('index.html?t=' + Date.now());
+        return;
+      }
+      
+      // 销毁锚点，防止二次触发
+      sessionStorage.removeItem('guide_pending_time');
+
       const state = getState();
       state.count += 1;
       state.lastShow = Date.now();
       saveState(state);
-
-      // 【行程结束】只有在这里才清除行程标记，并执行计数
-      sessionStorage.removeItem('guide_pending_time');
 
       if (state.phase === 'daily') {
         if (state.count === 1) alert('提示：该弹窗共出现 3 次，还剩 2 次。');
