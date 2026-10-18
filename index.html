@@ -1390,10 +1390,11 @@
       gap: 6px;
     }
 
-    .zsm-modal-title svg {
+    .zsm-modal-icon {
       width: 18px;
       height: 18px;
       display: block;
+      border-radius: 4px;
     }
 
     .zsm-modal-tip {
@@ -1668,17 +1669,7 @@
     <div class="zsm-modal-panel" role="dialog" aria-modal="true" aria-label="赞赏码">
       <button class="zsm-modal-close" type="button" data-close aria-label="关闭">×</button>
       <div class="zsm-modal-title">
-        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="48" height="48" rx="12" fill="#07C160"/>
-          <path d="M10 26.2 L5.4 32.2 L14.4 29.2 Z" fill="#ffffff"/>
-          <ellipse cx="18.5" cy="19" rx="11.2" ry="9.6" fill="#ffffff" stroke="#07C160" stroke-width="1.8"/>
-          <path d="M37.4 35.8 L42.4 41 L33.6 38.6 Z" fill="#ffffff"/>
-          <ellipse cx="32" cy="30.5" rx="8.8" ry="7.4" fill="#ffffff" stroke="#07C160" stroke-width="1.8"/>
-          <circle cx="14.5" cy="18.3" r="1.75" fill="#07C160"/>
-          <circle cx="22.5" cy="18.3" r="1.75" fill="#07C160"/>
-          <circle cx="28.6" cy="29.9" r="1.45" fill="#07C160"/>
-          <circle cx="35.4" cy="29.9" r="1.45" fill="#07C160"/>
-        </svg>
+        <img src="vip/wc.svg" alt="微信赞赏" class="zsm-modal-icon">
         <span id="zsmModalTitle">微信赞赏码</span>
       </div>
       <img id="zsmModalImg" src="" alt="赞赏码">
