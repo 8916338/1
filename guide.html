@@ -3,79 +3,203 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>系统提示3</title>
+  <meta name="color-scheme" content="light">
+  <title>系统提示</title>
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; width: 100%; overflow: hidden; background: rgba(10, 26, 43, 0.75); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    /* 弹窗遮罩层 */
-    .app-modal-mask { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 9999; }
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: #eef2f7;
+      color-scheme: light;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
 
-    /* 弹窗主体 */
+    .app-modal-mask {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 9999;
+      background: rgba(238, 242, 247, 0.85);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+    }
+
     .app-modal-box {
-      background: #fff; width: 100%; max-width: 340px; border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4); overflow: hidden;
-      display: flex; flex-direction: column;
-      transform: scale(0.9); opacity: 0;
+      background: #fff;
+      width: 100%;
+      max-width: 340px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(10, 26, 43, 0.15);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.9);
+      opacity: 0;
       animation: modalIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
-    @keyframes modalIn { to { transform: scale(1); opacity: 1; } }
 
-    /* 头部插图/图标 */
-    .app-modal-header { padding: 24px 20px 10px; text-align: center; }
-    .app-modal-icon { font-size: 48px; line-height: 1; margin-bottom: 12px; display: block; animation: bounce 2s infinite; }
-    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes modalIn {
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
 
-    .app-modal-title { font-size: 1.15rem; font-weight: 700; color: #0a1a2b; margin-bottom: 8px; }
+    .app-modal-header {
+      padding: 24px 20px 10px;
+      text-align: center;
+    }
 
-    /* 内容区 */
-    .app-modal-content { padding: 0 24px 20px; text-align: center; color: #5a6f88; font-size: 0.88rem; line-height: 1.6; flex: 1; }
-    .app-modal-content strong { color: #0a1a2b; font-weight: 600; }
-    .app-modal-content .highlight { color: #e08a00; font-weight: 600; }
+    .app-modal-icon {
+      font-size: 48px;
+      line-height: 1;
+      margin-bottom: 12px;
+      display: block;
+      animation: bounce 2s infinite;
+    }
 
-    /* 按钮区 */
-    .app-modal-footer { padding: 0 20px 24px; display: flex; flex-direction: column; gap: 12px; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .app-modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0a1a2b;
+      margin-bottom: 8px;
+    }
+
+    .app-modal-content {
+      padding: 0 24px 20px;
+      text-align: center;
+      color: #5a6f88;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .app-modal-content strong {
+      color: #0a1a2b;
+      font-weight: 600;
+    }
+
+    .app-modal-content .highlight {
+      color: #e08a00;
+      font-weight: 600;
+    }
+
+    .app-modal-footer {
+      padding: 0 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
     .btn-primary {
-      display: flex; align-items: center; justify-content: center;
-      width: 100%; height: 46px; background: #4a9eff; color: #fff;
-      border: none; border-radius: 50px; font-size: 1rem; font-weight: 600;
-      cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(74,158,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 46px;
+      background: #4a9eff;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
     }
-    .btn-primary:active { transform: scale(0.96); background: #2a7ed9; box-shadow: 0 2px 6px rgba(74,158,255,0.2); }
+
+    .btn-primary:active {
+      transform: scale(0.96);
+      background: #2a7ed9;
+      box-shadow: 0 2px 6px rgba(74, 158, 255, 0.2);
+    }
 
     .btn-secondary {
-      display: flex; align-items: center; justify-content: center;
-      width: 100%; height: 46px; background: #fff; color: #7a8fa3;
-      border: 1.5px solid #d4dbe5; border-radius: 50px; font-size: 0.95rem; font-weight: 500;
-      cursor: pointer; transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 46px;
+      background: #fff;
+      color: #7a8fa3;
+      border: 1.5px solid #d4dbe5;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
     }
-    .btn-secondary:active { transform: scale(0.96); background: #f4f8fc; }
 
-    /* 赞赏码样式 */
-    .zsm-img { display: block; width: 100%; max-width: 220px; margin: 0 auto; border-radius: 12px; border: 1px solid #e4ebf3; }
+    .btn-secondary:active {
+      transform: scale(0.96);
+      background: #f4f8fc;
+    }
 
-    /* 倒计时退出按钮 */
+    .zsm-img {
+      display: block;
+      width: 100%;
+      max-width: 220px;
+      margin: 0 auto;
+      border-radius: 12px;
+      border: 1px solid #e4ebf3;
+    }
+
     .btn-exit {
-      display: flex; align-items: center; justify-content: center;
-      width: 100%; height: 46px; background: #4a9eff; color: #fff;
-      border: none; border-radius: 50px; font-size: 0.95rem; font-weight: 600;
-      cursor: pointer; transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 46px;
+      background: #4a9eff;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
     }
-    .btn-exit:active { transform: scale(0.96); background: #2a7ed9; }
 
-    /* 步骤切换 */
-    .step { display: none; animation: fadeIn 0.3s forwards; }
-    .step.active { display: flex; flex-direction: column; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .btn-exit:active {
+      transform: scale(0.96);
+      background: #2a7ed9;
+    }
+
+    .step {
+      display: none;
+      animation: fadeIn 0.3s forwards;
+    }
+
+    .step.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   </style>
 </head>
 <body>
 
   <div class="app-modal-mask">
     <div class="app-modal-box">
-
-      <!-- 第一步：白嫖宣言 -->
       <div class="step" id="step1">
         <div class="app-modal-header">
           <span class="app-modal-icon">🕊️</span>
@@ -93,7 +217,6 @@
         </div>
       </div>
 
-      <!-- 第二步：为爱发电 -->
       <div class="step" id="step2">
         <div class="app-modal-header">
           <span class="app-modal-icon">❤️</span>
@@ -112,7 +235,6 @@
         </div>
       </div>
 
-      <!-- 第三步：赞赏码 -->
       <div class="step" id="step3">
         <div class="app-modal-header">
           <span class="app-modal-icon">🎉</span>
@@ -130,7 +252,6 @@
         </div>
       </div>
 
-      <!-- 第四步：拒绝/白嫖肯定 -->
       <div class="step" id="step4">
         <div class="app-modal-header">
           <span class="app-modal-icon">👍</span>
@@ -139,13 +260,12 @@
         <div class="app-modal-content">
           <p>非常欣赏你的领悟力！<br>你能完美继承站长的白嫖精神，站长深感欣慰。</p>
           <br>
-          <p>只要你用得开心，这个站就没白建，资源随便拿！</p>
+          <p>只要你用得开心，这个站就没白建。<br>资源随便拿，不要有心理负担！</p>
         </div>
         <div class="app-modal-footer">
           <button class="btn-exit" id="cdBtn" onclick="closeGuide()">立即退出 (15s)</button>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -155,7 +275,11 @@
     function getState() {
       let state = localStorage.getItem(STATE_KEY);
       if (state) {
-        try { state = JSON.parse(state); } catch(e) { state = null; }
+        try {
+          state = JSON.parse(state);
+        } catch (e) {
+          state = null;
+        }
       }
       if (!state) {
         state = { phase: 'daily', count: 0, lastShow: 0 };
@@ -227,26 +351,23 @@
         if (state.count === 1) alert('提示：该弹窗共出现 3 次，还剩 2 次。');
         else if (state.count === 2) alert('提示：该弹窗共出现 3 次，还剩 1 次。');
         else if (state.count >= 3) alert('提示：本次弹窗已完成，短期内不再出现。');
-      } 
-      else if (state.phase === 'weekly') {
+      } else if (state.phase === 'weekly') {
         if (state.count === 1) alert('提示：本周期弹窗共出现 3 次，还剩 2 次。');
         else if (state.count === 2) alert('提示：本周期弹窗共出现 3 次，还剩 1 次。');
         else if (state.count >= 3) alert('提示：本周期弹窗已完成，一个月内不再出现。');
-      }
-      else if (state.phase === 'monthly') {
+      } else if (state.phase === 'monthly') {
         if (state.count === 1) alert('提示：本月弹窗共出现 3 次，还剩 2 次。');
         else if (state.count === 2) alert('提示：本月弹窗共出现 3 次，还剩 1 次。');
         else if (state.count >= 3) alert('提示：本月弹窗已完成，下个月见。');
       }
 
-      // 【终极修复】强行加时间戳刷新页面，彻底击穿 BFCache
       window.location.replace('index.html?t=' + Date.now());
     }
 
     document.getElementById('step1').classList.add('active');
 
     document.querySelector('.app-modal-mask').addEventListener('click', function(e) {
-      if(e.target === this) return; 
+      if (e.target === this) return;
     });
   </script>
 </body>
