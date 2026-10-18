@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
-  <title>海量接口搬运备份6</title>
+  <title>海量接口搬运备份</title>
   <link rel="icon" type="image/jpeg" href="vip/jueson.jpg">
   
   <script>
@@ -11,24 +11,27 @@
     // 拦截逻辑：优先读取 config.json 判断是否开启弹窗
     // =========================================================
     (function checkGuide() {
-      // 1. 先通过同步请求或预读缓存获取配置开关（为了不阻塞加载，这里用异步 fetch）
-      // 考虑到阻塞问题，我们用最快的方式去拿 config，或者预置一个默认开关
       fetch('config.json?t=' + Date.now(), { cache: 'no-store' })
         .then(res => res.json())
         .then(cfg => {
           const guideEnabled = cfg.site && cfg.site.enableGuide;
-          if (!guideEnabled) return; // 如果关闭了弹窗，直接返回，继续加载页面
+          if (!guideEnabled) return; // 如果关闭了弹窗，直接返回
 
-          // 2. 弹窗状态机判断
           const STATE_KEY = 'guide_prompt_state';
           let state = null;
           try { state = JSON.parse(localStorage.getItem(STATE_KEY)); } catch(e) {}
           
           const now = Date.now();
           const DAY_MS = 24 * 60 * 60 * 1000;
+          const COOLDOWN_MS = 30 * 60 * 1000; // 【核心修改】30分钟冷却期，同一时段内刷新不再弹
 
           if (!state) {
             window.location.replace('guide.html');
+            return;
+          }
+
+          // 如果距离上次弹窗不到 30 分钟，视为同一次访问，不再拦截
+          if (now - state.lastShow < COOLDOWN_MS) {
             return;
           }
 
@@ -722,9 +725,9 @@
         selectors: {
           api: '#api-panel .api-item',
           live: '#live-panel .live-item',
-          download: '.download-card',
-          video: '.online-item, .tool-chip',
-          more: '.api-item',
+          download: '.download-card, .online-item, .tool-chip, .api-item',
+          video: '.download-card, .online-item, .tool-chip, .api-item',
+          more: '.download-card, .online-item, .tool-chip, .api-item',
           contributors: '.contributor-card'
         }
       }, SITE_CONFIG.search || {});
