@@ -223,7 +223,7 @@
           <div class="app-modal-title">为爱发电，需要续航</div>
         </div>
         <div class="app-modal-content">
-          <p>但说实话，为爱发电是临时的。热情不能一直在，早晚会散场。</p>
+          <p>但说实话，为爱发电是临时的。热情虽然一直在，但不可能永远靠爱填饱肚子。</p>
           <br>
           <p>站长也需要一点回馈和鼓励，才有动力一直维护，让这个免费的小站<strong>长期运营下去</strong>。</p>
           <br>
@@ -292,8 +292,16 @@
     }
 
     window.onload = function() {
-      const state = getState();
+      // 校验是否是从 index 带着锚点合法跳转进来的
+      const pendingTime = sessionStorage.getItem('guide_pending_time');
       const now = Date.now();
+
+      if (!pendingTime || (now - Number(pendingTime) > 10 * 60 * 1000)) {
+        window.location.replace('index.html?t=' + Date.now());
+        return;
+      }
+
+      const state = getState();
       const DAY_MS = 24 * 60 * 60 * 1000;
       const diffDays = (now - state.lastShow) / DAY_MS;
 
@@ -307,6 +315,7 @@
       }
 
       if (!show) {
+        sessionStorage.removeItem('guide_pending_time');
         window.location.replace('index.html?t=' + Date.now());
       }
     };
@@ -346,6 +355,9 @@
       state.count += 1;
       state.lastShow = Date.now();
       saveState(state);
+
+      // 【行程结束】只有在这里才清除行程标记，并执行计数
+      sessionStorage.removeItem('guide_pending_time');
 
       if (state.phase === 'daily') {
         if (state.count === 1) alert('提示：该弹窗共出现 3 次，还剩 2 次。');
