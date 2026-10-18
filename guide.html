@@ -105,12 +105,17 @@
   </div>
 
   <script>
-    const STATE_KEY = 'guide_prompt_state';
+    // 【新增】清理地址栏，去掉 guide.html 和 ?t= 参数，只留纯域名
+    (function cleanUrl() {
+      let path = window.location.pathname;
+      let search = window.location.search;
+      let newPath = path.replace(/\/guide\.html$/, '/');
+      if (newPath !== path || search) {
+        window.history.replaceState(null, '', newPath + window.location.hash);
+      }
+    })();
 
-    // 【新增】清理地址栏的 ?t= 参数，保持域名干净
-    if (window.location.search.includes('t=')) {
-      window.history.replaceState(null, null, window.location.pathname);
-    }
+    const STATE_KEY = 'guide_prompt_state';
 
     function getState() {
       let state = localStorage.getItem(STATE_KEY);
