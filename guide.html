@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>系统提示5</title>
+  <title>系统提示</title>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; width: 100%; overflow: hidden; background: rgba(10, 26, 43, 0.75); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
@@ -231,10 +231,10 @@
       state.lastShow = Date.now();
       saveState(state);
 
-      // 根据当前阶段和次数给出提示
+      // 根据当前阶段和次数给出提示（修正了错别字）
       if (state.phase === 'daily') {
-        if (state.count === 1) alert('提示：该弹窗本次弹共出现 3 次，还剩 2 次。');
-        else if (state.count === 2) alert('提示：该弹窗本次弹窗共出现 3 次，还剩 1 次。');
+        if (state.count === 1) alert('提示：该弹窗共出现 3 次，还剩 2 次。');
+        else if (state.count === 2) alert('提示：该弹窗共出现 3 次，还剩 1 次。');
         else if (state.count >= 3) alert('提示：本次弹窗已完成，短期内不再出现。');
       } 
       else if (state.phase === 'weekly') {
@@ -248,8 +248,12 @@
         else if (state.count >= 3) alert('提示：本月弹窗已完成，下个月见。');
       }
 
-      // 重定向回首页
-      window.location.href = './';
+      // 【核心修复】优先返回来源页，避免强制刷新首页导致再次触发拦截
+      if (document.referrer && (document.referrer.includes('index.html') || document.referrer.endsWith('/'))) {
+        window.history.back();
+      } else {
+        window.location.replace('./');
+      }
     }
 
     // 默认显示第一步
