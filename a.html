@@ -8,18 +8,20 @@
   
   <script>
     // =========================================================
-    // 拦截逻辑：优先读取 config.json 判断是否开启弹窗
+    // 拦截逻辑：读取 config.json 的开关与冷却时间
     // =========================================================
     (function checkGuide() {
-      // 1. 先通过同步请求或预读缓存获取配置开关（为了不阻塞加载，这里用异步 fetch）
-      // 考虑到阻塞问题，我们用最快的方式去拿 config，或者预置一个默认开关
       fetch('config.json?t=' + Date.now(), { cache: 'no-store' })
         .then(res => res.json())
         .then(cfg => {
-          const guideEnabled = cfg.site && cfg.site.enableGuide;
-          if (!guideEnabled) return; // 如果关闭了弹窗，直接返回，继续加载页面
+          const siteCfg = cfg.site || {};
+          const guideEnabled = siteCfg.enableGuide;
+          if (!guideEnabled) return;
 
-          // 2. 弹窗状态机判断
+          // 【新增】读取自定义冷却时间（分钟），如果没有则默认 30 分钟
+          const cooldownMin = siteCfg.guideCooldown !== undefined ? Number(siteCfg.guideCooldown) : 30;
+          const COOLDOWN_MS = cooldownMin * 60 * 1000;
+
           const STATE_KEY = 'guide_prompt_state';
           let state = null;
           try { state = JSON.parse(localStorage.getItem(STATE_KEY)); } catch(e) {}
@@ -30,6 +32,11 @@
           if (!state) {
             window.location.replace('guide.html');
             return;
+          }
+
+          // 【核心逻辑】如果距离上次弹窗还没超过冷却时间，直接放行
+          if (now - state.lastShow < COOLDOWN_MS) {
+            return; 
           }
 
           const diffDays = (now - state.lastShow) / DAY_MS;
