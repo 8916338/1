@@ -150,10 +150,8 @@
   </div>
 
   <script>
-    // === 状态机逻辑 ===
     const STATE_KEY = 'guide_prompt_state';
 
-    // 获取或初始化状态
     function getState() {
       let state = localStorage.getItem(STATE_KEY);
       if (state) {
@@ -165,12 +163,10 @@
       return state;
     }
 
-    // 保存状态
     function saveState(state) {
       localStorage.setItem(STATE_KEY, JSON.stringify(state));
     }
 
-    // 页面加载时检查是否需要弹窗
     window.onload = function() {
       const state = getState();
       const now = Date.now();
@@ -187,11 +183,10 @@
       }
 
       if (!show) {
-        window.location.href = './';
+        window.location.replace('index.html?t=' + Date.now());
       }
     };
 
-    // 步骤切换
     function goStep(step) {
       document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
       document.getElementById('step' + step).classList.add('active');
@@ -201,14 +196,12 @@
       }
     }
 
-    // 倒计时逻辑
     let cdTimer;
     function startCountdown() {
       let timeLeft = 15;
       const btn = document.getElementById('cdBtn');
       btn.textContent = `立即退出 (${timeLeft}s)`;
 
-      // 清除可能存在的旧定时器
       if (cdTimer) clearInterval(cdTimer);
 
       cdTimer = setInterval(() => {
@@ -222,7 +215,6 @@
       }, 1000);
     }
 
-    // 关闭弹窗并更新状态
     function closeGuide() {
       if (cdTimer) clearInterval(cdTimer);
 
@@ -231,7 +223,6 @@
       state.lastShow = Date.now();
       saveState(state);
 
-      // 根据当前阶段和次数给出提示（修正了错别字）
       if (state.phase === 'daily') {
         if (state.count === 1) alert('提示：该弹窗共出现 3 次，还剩 2 次。');
         else if (state.count === 2) alert('提示：该弹窗共出现 3 次，还剩 1 次。');
@@ -248,18 +239,12 @@
         else if (state.count >= 3) alert('提示：本月弹窗已完成，下个月见。');
       }
 
-      // 【核心修复】优先返回来源页，避免强制刷新首页导致再次触发拦截
-      if (document.referrer && (document.referrer.includes('index.html') || document.referrer.endsWith('/'))) {
-        window.history.back();
-      } else {
-        window.location.replace('./');
-      }
+      // 【终极修复】强行加时间戳刷新页面，彻底击穿 BFCache
+      window.location.replace('index.html?t=' + Date.now());
     }
 
-    // 默认显示第一步
     document.getElementById('step1').classList.add('active');
 
-    // 拦截空白点击
     document.querySelector('.app-modal-mask').addEventListener('click', function(e) {
       if(e.target === this) return; 
     });
