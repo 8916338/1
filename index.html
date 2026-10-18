@@ -14,7 +14,7 @@
     const ENABLE_GUIDE = true;
     const GUIDE_COOLDOWN_MINUTES = 8;
 
-    (function checkGuide() {
+    function checkGuideStatus() {
       if (!ENABLE_GUIDE) return;
 
       const STATE_KEY = 'guide_prompt_state';
@@ -27,15 +27,31 @@
       const DAY_MS = 24 * 60 * 60 * 1000;
       const COOLDOWN_MS = GUIDE_COOLDOWN_MINUTES * 60 * 1000;
 
+      // 1. 检查是否有未完成的任务标记（比如用户按了浏览器返回）
+      const pendingTime = sessionStorage.getItem('guide_pending_time');
+      if (pendingTime) {
+        // 标记在 10 分钟内有效，如果存在，直接踢回 guide 重走流程
+        if (now - Number(pendingTime) < 10 * 60 * 1000) {
+          window.location.replace('guide.html?t=' + Date.now());
+          return;
+        } else {
+          sessionStorage.removeItem('guide_pending_time');
+        }
+      }
+
+      // 2. 首次访问判断
       if (!state) {
+        sessionStorage.setItem('guide_pending_time', now);
         window.location.replace('guide.html?t=' + Date.now());
         return;
       }
 
+      // 3. 冷却时间判断
       if (now - state.lastShow < COOLDOWN_MS) {
         return;
       }
 
+      // 4. 阶段周期判断
       const diffDays = (now - state.lastShow) / DAY_MS;
       let needGuide = false;
 
@@ -48,9 +64,20 @@
       }
 
       if (needGuide) {
+        sessionStorage.setItem('guide_pending_time', now);
         window.location.replace('guide.html?t=' + Date.now());
       }
-    })();
+    }
+
+    // 初始加载检查
+    checkGuideStatus();
+
+    // 监听页面从 BFCache 中恢复（用户按了浏览器返回）
+    window.addEventListener('pageshow', function(e) {
+      if (e.persisted || (window.performance && window.performance.navigation.type === 2)) {
+        checkGuideStatus();
+      }
+    });
   </script>
 
   <style>
