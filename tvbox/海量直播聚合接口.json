@@ -1,6 +1,12 @@
 {
   "lives": [
     {
+      "name": "Guovin",
+      "url": "https://cdn.jsdelivr.net/gh/Guovin/iptv-api@gd/output/result.m3u",
+      "ua": "",
+      "source": "X4更新专用接口"
+    },
+    {
       "name": "Kimentanm",
       "url": "https://down.nigx.cn/raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u",
       "ua": "",
@@ -41,12 +47,6 @@
       "url": "http://127.0.0.1:5266/iptv.m3u",
       "ua": "",
       "source": "摸鱼"
-    },
-    {
-      "name": "Guovin",
-      "url": "https://cdn.jsdelivr.net/gh/Guovin/iptv-api@gd/output/result.m3u",
-      "ua": "",
-      "source": "X4菠菜pro"
     },
     {
       "name": "牛播一",
