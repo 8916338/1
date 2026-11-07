@@ -32,7 +32,7 @@ clun.json|20261107|29.4K|https://clun.top/box.json
 凯弟3线.json|20261107|21.7K|https://jihulab.com/jyqhkd/kd/-/raw/main/kai.json
 东篱.json|20261107|35.6K|https://chigua.eu.org
 聚玩.json|20261107|21.2K|http://xhztv.top/xhz
-哈吉米.json|20261107|42.5K|https://17264.kstore.space/哈基米.png
+哈吉米.json|20261107|42.9K|https://17264.kstore.space/哈基米.png
 真六.json|20261107|19.5K|https://cccimg.com/down.php/7d1f30263b3f2bf3deda2d7faeef4844.zhen6
 动漫.json|20261107|8.4K|https://www.yingm.cc/dm/dm.json
 天神.json|20261107|36.2K|https://gh-proxy.com/raw.githubusercontent.com/IY-CPU/IY/main/天神IY.png
@@ -42,6 +42,6 @@ FongMI线路.json|20261107|9.2K|https://gh-proxy.com/raw.githubusercontent.com//
 高天流云js.json|20261107|100.1K|https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js.json
 高天流云_XYQ.json|20261107|19.6K|https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/XYQ.json
 凯弟1线.json|20261107|20.9K|https://jihulab.com/jyqhkd1/kai/-/raw/main/机缘巧盒凯弟.json
-肥猫.json|20261103|15.4K|http://肥猫.net/tv
+肥猫.json|20261107|15.8K|http://肥猫.net
+香雅情.json|20261107|21.1K|https://play.iptv365.org/香雅情/api.json
 X4少儿频道.json|20261102|19.2K|https://0.wudaozhe.net/5/tv少儿.json
-香雅情.json|20261102|21.1K|https://play.iptv365.org/香雅情/api.json
