@@ -71,8 +71,6 @@ https://ppv.passwdwork.us.ci/?proxy=1&id=nfl/2026-11-08/tb-chi
 https://ppv.passwdwork.us.ci/?proxy=1&id=nfl/2026-11-09/buf-min
 #EXTINF:-1 tvg-logo="https://static.ppvservices.st/assets/thumb/514cf8272ec290889a5ce6fd299fb9c8-thumbnail.jpg" group-title="Australian Football",Fox Footy
 https://ppv.passwdwork.us.ci/?proxy=1&id=247-fox-footy
-#EXTINF:-1 tvg-logo="https://static.ppvservices.st/assets/thumb/50e54ec1be69b92daf79f74ccbdda031-thumbnail.jpg" group-title="Basketball",Northeastern Huskies at Virginia Cavaliers (06:00 ~ 09:00)
-https://ppv.passwdwork.us.ci/?proxy=1&id=cbb/2026-11-06/ne-uva
 #EXTINF:-1 tvg-logo="https://static.ppvservices.st/assets/thumb/21724c49f46faf47b36bbd9a16c9ed60-thumbnail.jpg" group-title="Basketball",Washington Wizards vs. Atlanta Hawks (08:00 ~ 11:00)
 https://ppv.passwdwork.us.ci/?proxy=1&id=nba/2026-11-06/wsh-atl
 #EXTINF:-1 tvg-logo="https://static.ppvservices.st/assets/thumb/4b756d4571d07c6e8d38730ffd03ebdc-thumbnail.jpg" group-title="Basketball",Boston Celtics vs. Charlotte Hornets (08:00 ~ 11:00)
