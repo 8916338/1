@@ -41,13 +41,20 @@
       "contributors": ".contributor-card"
     }
   },
-
   "apiDomains": [
-    { "tag": "备份线路", "base": "https://此处需站长更改自定义域名.com/tvbox/" }
+    { "tag": "分流线路", "base": "https://0.wudaozhe.net/tvbox/" },
+    { "tag": "全球线路", "base": "https://1.wudaozhe.net/tvbox/" },
+    { "tag": "备份三线", "base": "https://0.12yue.de5.net/tvbox/" },
+    { "tag": "备份四线", "base": "https://0.cdz.qzz.io/tvbox/" },
+    { "tag": "备份五线", "base": "https://0.wdzb.eu.cc/tvbox/" }
   ],
 
   "liveDomains": [
-    { "tag": "备份线路", "base": "https://此处需站长更改自定义域名.com/tvbox/live/" }
+    { "tag": "分流线路", "base": "https://0.wudaozhe.net/tvbox/live/" },
+    { "tag": "全球线路", "base": "https://1.wudaozhe.net/tvbox/live/" },
+    { "tag": "备份三线", "base": "https://0.12yue.de5.net/tvbox/live/" },
+    { "tag": "备份四线", "base": "https://0.cdz.qzz.io/tvbox/live/" },
+    { "tag": "备份五线", "base": "https://0.wdzb.eu.cc/tvbox/live/" }
   ],
 
   "apiWeights": {
