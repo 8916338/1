@@ -719,6 +719,7 @@
       min-width: 0;
       width: 100%;
     }
+    .online-item.is-coming { opacity: .72; cursor: default; }
 
     .online-item:active {
       border-color: #4a9eff;
@@ -2245,6 +2246,18 @@
         iconHtml = `<span class="site-ph" style="display:flex">${ph}</span>`;
       }
 
+      // 占位条目（url 为空或只有 "https://"）不做成可点链接
+      const usable = /^https?:\/\/[^\s\/]+/i.test(String(item.url || '').trim());
+      if (!usable) {
+        return `<div class="online-item is-coming" data-name="${name.toLowerCase()}">
+        <span class="online-item-icon">${iconHtml}</span>
+        <div class="online-item-info">
+          <div class="online-item-name">${name}</div>
+          <div class="online-item-desc">${desc || '内容建设中，敬请期待'}</div>
+        </div>
+      </div>`;
+      }
+
       return `<a class="online-item" href="${url}" target="_blank" rel="noopener noreferrer" data-name="${name.toLowerCase()}">
         <span class="online-item-icon">${iconHtml}</span>
         <div class="online-item-info">
@@ -2306,41 +2319,70 @@
       </div>`;
     }
 
-    // 自适应解析本地包 JSON：
-    // 1) 优先按标准 JSON 直接解析，不做任何字符改动（避免破坏含中文引号/逗号的字符串值，
-    //    如 ry/奇奇下载.json 中的 "“南风”线路补丁"）；
-    // 2) 失败时按"字符串感知"方式容错：逐字符扫描并跟踪是否处于 JSON 字符串内部，
-    //    仅把结构位上的中文引号/冒号/逗号替换为 ASCII 等价物，字符串内容原样保留；
-    // 3) 仍失败则抛出原始错误（由调用方展示 error-msg）。
+    // 自适应解析下载源 JSON（index.html / app.html / 模板页共用同一套逻辑）：
+    // 背景：上游数据里含全角引号，例如 ry/奇奇下载.json 的 "name": "“南风”线路补丁"。
+    //   旧写法用无差别替换把 “ ” 都换成 " ，值就被拆成 ""南风"线路补丁"，
+    //   浏览器于是报 Expected ',' or '}' after property value in JSON at position ...
+    // 策略（三层，任何一层都不改动字符串内容本身）：
+    //   1) 原样 JSON.parse —— 合法文件零成本通过；
+    //   2) 失败则"字符串感知"修复：只转换结构位上的全角标点；字符串内部的引号用
+    //      前瞻判断——闭合引号后面（跳过空白）必须是 , } ] : ，否则视为内容里的引号并转义；
+    //   3) 仍失败则裁掉首尾杂质（BOM、注释、HTML 包裹）再试一次。
     function parseLocalPackageJSON(text) {
-      text = String(text).replace(/^\uFEFF/, '').trim();
-      try { return JSON.parse(text); } catch (e) { /* 继续容错清洗 */ }
+      const src = String(text == null ? '' : text).replace(/^\uFEFF/, '').trim();
+      if (!src) throw new Error('内容为空');
+      try { return JSON.parse(src); } catch (e) { /* 进入容错修复 */ }
 
-      let out = '';
-      let inStr = false;   // 当前是否在字符串内
-      let quote = '';      // 当前字符串的定界符
+      const repaired = repairLooseJSON(src);
+      try { return JSON.parse(repaired); } catch (e) { var lastErr = e; }
+
+      const frag = sliceJSONFragment(repaired);
+      if (frag) { try { return JSON.parse(frag); } catch (e) { lastErr = e; } }
+      throw new Error((lastErr && lastErr.message) ? lastErr.message : 'JSON 解析失败');
+    }
+
+    // 宽松 JSON 修复：只在结构位动手，字符串内容原样保留
+    function repairLooseJSON(text) {
       const isDq = c => c === '"' || c === '\u201c' || c === '\u201d';   // 双引号类
       const isSq = c => c === "'" || c === '\u2018' || c === '\u2019';   // 单引号类
+      let out = '';
+      let inStr = false;
+      let q = '';
       for (let i = 0; i < text.length; i++) {
         const ch = text[i];
         if (inStr) {
-          if (ch === '\\') {                       // 转义序列整体保留
-            out += ch + (text[i + 1] || ''); i++; continue;
+          if (ch === '\\') { out += ch + (text[i + 1] || ''); i++; continue; }
+          // 可能是闭合引号：ASCII 定界符，或全角右引号（兼容全角包裹的写法）
+          const maybeClose = (ch === q) || (q === '"' && ch === '\u201d') || (q === "'" && ch === '\u2019');
+          if (maybeClose) {
+            let j = i + 1;
+            while (j < text.length && /\s/.test(text[j])) j++;
+            const nx = text[j];
+            // 只有紧跟结构符号才算真的闭合，否则认定是值里的引号（如 “南风” 被转成 "南风"）
+            if (nx === undefined || nx === ',' || nx === '}' || nx === ']' || nx === ':' || nx === '\uff1a' || nx === '\uff0c' || nx === '\uff1b') {
+              inStr = false; q = ''; out += '"'; continue;
+            }
+            out += '\\"'; continue;
           }
-          // 命中定界符（中英文引号互相匹配均视为闭合）-> 字符串结束
-          const closed = (quote === '"' && isDq(ch)) ||
-                         (quote === "'" && isSq(ch));
-          if (closed) { inStr = false; quote = ''; out += '"'; continue; }
-          out += ch; continue;                     // 字符串内容原样保留
+          out += ch; continue;                     // 其余字符（含全角引号）原样保留
         }
         if (isDq(ch) || isSq(ch)) {                // 结构位 -> 字符串开始，统一输出 ASCII 引号
-          inStr = true; quote = isDq(ch) ? '"' : "'"; out += '"'; continue;
+          inStr = true; q = isDq(ch) ? '"' : "'"; out += '"'; continue;
         }
         if (ch === '\uff1a') { out += ':'; continue; }   // ：
         if (ch === '\uff0c') { out += ','; continue; }   // ，
+        if (ch === '\uff1b') { out += ','; continue; }   // ；
         out += ch;
       }
-      return JSON.parse(out);
+      return out;
+    }
+
+    // 截取首个 [ / { 到最后一个 ] / } 之间的内容，去掉 JSON 前后的注释或 HTML 杂质
+    function sliceJSONFragment(text) {
+      const s = text.search(/[\[{]/);
+      if (s < 0) return '';
+      const e = Math.max(text.lastIndexOf(']'), text.lastIndexOf('}'));
+      return (e > s) ? text.slice(s, e + 1) : '';
     }
 
     async function renderDynamicPanel(rawTabs, containerId, defaultType = 'api') {
