@@ -42,13 +42,20 @@
       "contributors": ".contributor-card"
     }
   },
-
   "apiDomains": [
-    { "tag": "备份线路", "base": "https://此处需站长更改自定义域名.com/tvbox/" }
+    { "tag": "分流线路", "base": "https://0.wudaozhe.net/tvbox/" },
+    { "tag": "全球线路", "base": "https://1.wudaozhe.net/tvbox/" },
+    { "tag": "备份三线", "base": "https://0.12yue.de5.net/tvbox/" },
+    { "tag": "备份四线", "base": "https://0.cdz.qzz.io/tvbox/" },
+    { "tag": "备份五线", "base": "https://0.wdzb.eu.cc/tvbox/" }
   ],
 
   "liveDomains": [
-    { "tag": "备份线路", "base": "https://此处需站长更改自定义域名.com/tvbox/live/" }
+    { "tag": "分流线路", "base": "https://0.wudaozhe.net/tvbox/live/" },
+    { "tag": "全球线路", "base": "https://1.wudaozhe.net/tvbox/live/" },
+    { "tag": "备份三线", "base": "https://0.12yue.de5.net/tvbox/live/" },
+    { "tag": "备份四线", "base": "https://0.cdz.qzz.io/tvbox/live/" },
+    { "tag": "备份五线", "base": "https://0.wdzb.eu.cc/tvbox/live/" }
   ],
 
   "apiWeights": {
@@ -76,14 +83,14 @@
 
   "liveAggregate": {
     "title": "海量直播聚合多线路专用接口",
-    "url": "https://此处需站长更改自定义域名.com/tvbox/海量直播聚合接口.json"
+    "url": "https://0.wudaozhe.net/tvbox/海量直播聚合接口.json"
   },
 
   "downloadSources": [
     { "name": "本站APP", "url": "cy/本站APP.json", "icon": "📱", "description": "官方客户端", "type": "online" },
     { "name": "X4采集站", "url": "ry/菠菜园下载.json", "icon": "🥬", "description": "整理者：误道者", "type": "download" },
-    { "name": "奇奇副本", "url": "ry/奇奇副本.json", "icon": "📦", "description": "整理者：误道者", "type": "download" },
     { "name": "奇奇下载", "url": "ry/奇奇下载.json", "icon": "📦", "description": "整理者：奇奇", "type": "download" },
+    { "name": "奇奇副本", "url": "ry/奇奇副本.json", "icon": "📦", "description": "整理者：误道者", "type": "download" },
     { "name": "无忧", "url": "ry/无忧下载.json", "icon": "☁️", "description": "云星", "type": "download" },
     { "name": "潇洒", "url": "ry/潇洒下载.json", "icon": "🕶️", "description": "潇洒", "type": "download" },
     { "name": "柒豪下载", "url": "ry/柒豪下载.json", "icon": "📦", "description": "", "type": "download" },
