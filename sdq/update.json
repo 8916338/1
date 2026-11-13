@@ -1,14 +1,7 @@
 {
-  "versionCode": 0,
+  "versionCode": 18,
   "versionName": "1.0.0",
-  "downloadUrl": "https://把这里换成真实下载地址/浏览器测试版-2.0.5.apk",
-  "minVersionCode": 1,
-  "changelog": "这里写说明\n换行",
-  "force": false,
-  "title": "发现新版本",
-  "notice": "",
-  "size": "813 KB",
-  "sha256": "",
-  "publishedAt": "2026-11-13",
-  "channel": "stable"
+  "downloadUrl": "https://你的地址/闪电球1.0.0.apk",
+  "changelog": "1.更新测试 ",
+  "minVersionCode": 0
 }
