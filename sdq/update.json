@@ -1,7 +1,7 @@
 {
-  "versionCode": 19,
-  "versionName": "1.0.1",
-  "downloadUrl": "https://0.wudaozhe.net/sdq/闪电球1.0.1.apk",
-  "changelog": "测试更新不用追更",
+  "versionCode": 21,
+  "versionName": "1.0.3",
+  "downloadUrl": "https://0.wudaozhe.net/sdq/闪电球1.0.3.apk",
+  "changelog": "解决更新签名冲突",
   "minVersionCode": 0
 }
