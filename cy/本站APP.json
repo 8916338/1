@@ -2,6 +2,6 @@
   "title": "本站推荐",
   "description": "",
   "items": [
-    { "name": "闪电球", "url": "https://0.wudaozhe.net/sdq", "icon": "sdq/logo.png", "desc": "聚合浏览器" }
+    { "name": "闪电球", "url": "https://0.wudaozhe.net/sdq", "icon": "sdq/logo.png", "desc": "聚合接口浏览器" }
   ]
 }
