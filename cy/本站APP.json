@@ -1,7 +1,7 @@
 {
-  "title": "接口大全",
+  "title": "本站推荐",
   "description": "",
   "items": [
-    { "name": "接口大全", "url": "https://", "icon": "vip/jueson.jpg", "desc": "尚未建设完,敬请期待" }
+    { "name": "闪电球", "url": "sdq", "icon": "sdq/logo.png", "desc": "聚合浏览器" }
   ]
 }
