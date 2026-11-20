@@ -2,13 +2,12 @@
   {
     "name": "X4采集站",
     "date": "",
-    "size": "",
+    "size": "安卓4",
     "origUrl": "",
     "urls": [
-      { "label": "基础线路", "url": "https://3.wudaozhe.net/5/x4.json" },
-      { "label": "增强线路", "url": "https://3.wudaozhe.net/5/x4pro.json"  },
-      { "label": "少儿频道", "url": "https://3.wudaozhe.net/5/tv少儿.json" },
-      { "label": "更新专用", "url": "https://3.wudaozhe.net/0/666" }
+      { "label": "菠菜园线路", "url": "https://0.wudaozhe.net/5/x4.json" },
+      { "label": "短剧菠+菜园线路", "url": "https://0.wudaozhe.net/5/短剧.json"  },
+      { "label": "少儿频道", "url": "https://0.wudaozhe.net/5/tv少儿.json" }
     ]
   }
 ]
