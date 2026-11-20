@@ -6,7 +6,7 @@
     "origUrl": "",
     "urls": [
       { "label": "菠菜园线路", "url": "https://0.wudaozhe.net/5/x4.json" },
-      { "label": "短剧菠+菜园线路", "url": "https://0.wudaozhe.net/5/短剧.json"  },
+      { "label": "短剧+菠菜园线路", "url": "https://0.wudaozhe.net/5/短剧.json"  },
       { "label": "少儿频道", "url": "https://0.wudaozhe.net/5/tv少儿.json" }
     ]
   }
