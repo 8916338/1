@@ -58,12 +58,6 @@
       }
     },
     {
-      "key": "本地",
-      "name": "📁本地┃视频",
-      "type": 3,
-      "api": "csp_LocalFile"
-    },
-    {
       "key": "世界",
       "name": "❤️世界｜4K线路",
       "type": 3,
