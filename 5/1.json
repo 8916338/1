@@ -1,0 +1,13 @@
+{
+  "sites": [
+    {
+      "key": "py",
+      "name": "py测试",
+      "type": 3,
+      "api": "https://gh-proxy.com/https://raw.githubusercontent.com/8916338/1/main/5/hg.py",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    }
+  ]
+}
