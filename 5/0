@@ -1,0 +1,13 @@
+{
+  "sites": [
+  {
+      "key": "ytb",
+      "name": "测试一",
+      "type": 3,
+            "searchable": 1,
+            "quickSearch": 1,
+      "api": "https://gh-proxy.com/https://gh-proxy.com/https://github.com/8916338/1/raw/main/5/hg.py"
+    }
+    
+  ]
+}
