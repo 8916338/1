@@ -1,0 +1,96 @@
+{
+  "categories": [
+
+    {
+      "name": "X站",
+      "websites": [
+        { 
+        "name": "修修", 
+        "url": "https://fao.yxbk852.com:8301/index.htm" 
+        },
+        { 
+        "name": "秀色", 
+        "url": "https://6ja2wafdgcujujdk.xseab376.vip:8321/index.htm" 
+        },
+        { 
+        "name": "missav", 
+        "url": "https://www.missav365.one" 
+        },
+        { 
+        "name": "55X", 
+        "url": "https://avsolu1.com/cn" 
+        },
+        { 
+        "name": "javd", 
+        "url": "https://javd.me/" 
+        }
+      ]
+    },
+    {
+      "name": "搜索",
+      "websites": [
+        { 
+        "name": "必应", 
+        "url": "https://cn.bing.com/" 
+        },
+        { 
+        "name": "yandex", 
+        "url": "https://yandex.com/" 
+        },
+        { 
+        "name": "baidu", 
+        "url": "https://baidu.com/" 
+        },
+        { 
+        "name": "Google", 
+        "url": "https://google.com" 
+        }
+      ]
+    },
+    {
+      "name": "工具",
+      "websites": [
+        { 
+        "name": "Tvbox接口解密编缉", 
+        "url": "https://bjq.catvod.site/" 
+        },
+        { 
+        "name": "Tvbox接口解密", 
+        "url": "https://www.xn--sss604efuw.com/jm/" 
+        },
+        { 
+        "name": "Tvbox接口解密2", 
+        "url": "https://jm.ctv.dpdns.org/" 
+        },
+        { 
+        "name": "Tvbox接口解密", 
+        "url": "https://jm.jiduonb.com/" 
+        },
+        { 
+        "name": "ping0", 
+        "url": "http://ping0.cc/" 
+        },
+        { 
+        "name": "ip测试", 
+        "url": "https://0.12yue.de5.net/iptool/1" 
+        },
+        { 
+        "name": "线路检测", 
+        "url": "../线路检测" 
+        },
+        { 
+        "name": "域名检测", 
+        "url": "https://www.whatsmydns.net/" 
+        },
+        { 
+        "name": "惜染直链托管", 
+        "url": "https://mpimg.cn/" 
+        },
+        { 
+        "name": "tvbox资源集合", 
+        "url": "https://0.12yue.de5.net/tvboxtool/" 
+        }
+      ]
+    }
+  ]
+}
