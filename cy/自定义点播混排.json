@@ -1,13 +1,13 @@
 [
   {
     "name": "X4采集站",
-    "date": "",
     "size": "安卓4",
     "origUrl": "",
     "urls": [
       { "label": "采集线路", "url": "https://0.wudaozhe.net/5/x4.json" },
       { "label": "短剧+采集线路", "url": "https://0.wudaozhe.net/5/短剧.json"  },
-      { "label": "少儿频道", "url": "https://0.wudaozhe.net/5/tv少儿.json" }
+      { "label": "少儿频道", "url": "https://0.wudaozhe.net/5/tv少儿.json" },
+      { "label": "肥猫", "url": "https://0.wudaozhe.net/5/肥猫.json"  }
     ]
   }
 ]
