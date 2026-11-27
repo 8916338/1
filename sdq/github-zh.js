@@ -1,42 +1,11 @@
-// ==UserScript==
-// @name         GitHub 中文化
-// @name:zh-CN   GitHub 中文化
-// @namespace    shanqiu.plugin.github-zh
-// @version      1.1.0
-// @description  把 GitHub 界面的固定英文换成中文，仓库名、README、代码、议题正文和评论保持原样
-// @author       shanqiu
-// @match        https://github.com/*
-// @match        https://gist.github.com/*
-// @match        https://docs.github.com/*
-// @match        https://github.blog/*
-// @match        https://education.github.com/*
-// @match        https://skills.github.com/*
-// @match        https://support.github.com/*
-// @run-at       document-idle
-// ==/UserScript==
-
-/*
- * 只翻「固定文案」：导航、按钮、页签、菜单、设置项、提示语、空状态、页脚。
- * 不翻「内容」：仓库名、仓库描述、README、代码、议题/PR 正文、评论、用户名。
- *
- * 做法是把文本节点的整段文字拿去词表里精确对，对不上就不动 ——
- * 所以不会出现「README 里正好有个 Pull requests 被顺手翻掉」这种事。
- *
- * 词表共 1897 条，按页面分类整理，见文件末尾 MAP。
- * GitHub 用 Turbo 做站内跳转，换页不重新加载文档，所以监听
- * turbo:load / pjax:end / popstate，另挂 MutationObserver 兜底。
- */
 (function () {
   'use strict';
 
   if (window.__shanqiuGithubZh) return;
   window.__shanqiuGithubZh = true;
 
-  // ---------------------------------------------------------------- 词表
-  // 键 = 页面上原样的英文（整段匹配）；值 = 中文
   var MAP = {
 
-    // ---- 01-全局导航
     'Navigation Menu': '导航菜单',
     'Skip to content': '跳到内容',
     'Skip to main content': '跳到主要内容',
@@ -184,7 +153,6 @@
     'Download': '下载',
     'Back to top': '回到顶部',
 
-    // ---- 02-仓库主页
     'Code': '代码',
     'Actions': '操作',
     'Wiki': '百科',
@@ -328,7 +296,6 @@
     'You can create a release to package software, along with release notes and links to binary files, for other people to use.': '你可以创建发行版来打包软件，附上发行说明和二进制文件链接，供他人使用。',
     'Browse files': '浏览文件',
 
-    // ---- 03-文件与代码
     'Files': '文件',
     'Folders and files': '文件夹与文件',
     'Name': '名称',
@@ -434,7 +401,6 @@
     'Filter changed files': '筛选变更文件',
     'Search files': '搜索文件',
 
-    // ---- 04-议题
     'Open': '打开',
     'Closed': '已关闭',
     'Open issues': '打开的议题',
@@ -552,7 +518,6 @@
     'To get started, you should create an issue.': '开始前，先创建一个议题。',
     'View all issues': '查看全部议题',
 
-    // ---- 05-拉取请求
     'Merged': '已合并',
     'Draft': '草稿',
     'Open pull requests': '打开的拉取请求',
@@ -664,7 +629,6 @@
     'Deployments': '部署',
     'Environments': '环境',
 
-    // ---- 06-操作
     'Workflows': '工作流',
     'Workflow': '工作流',
     'All workflows': '全部工作流',
@@ -773,7 +737,6 @@
     'Build, test, and deploy your code right from GitHub.': '直接在 GitHub 上构建、测试和部署代码。',
     'Automate your workflow from idea to production.': '从创意到生产，自动化你的工作流。',
 
-    // ---- 07-安全与洞察
     'Security overview': '安全概览',
     'Security advisories': '安全公告',
     'Security policy': '安全策略',
@@ -865,7 +828,6 @@
     'Contribution activity': '贡献活动',
     'Contribution settings': '贡献设置',
 
-    // ---- 08-设置
     'General': '常规',
     'Repository settings': '仓库设置',
     'General settings': '常规设置',
@@ -1041,7 +1003,6 @@
     'Delete account': '删除账户',
     'Export account data': '导出账户数据',
 
-    // ---- 09-通知与搜索
     'Inbox': '收件箱',
     'All notifications': '全部通知',
     'Unread': '未读',
@@ -1138,7 +1099,6 @@
     'Save this search': '保存此搜索',
     'Clear filters': '清除筛选',
 
-    // ---- 10-发行版与提交
     'Release': '发行版',
     'Latest': '最新',
     'Draft a new release': '起草新发行版',
@@ -1202,7 +1162,6 @@
     'Copy the full SHA1': '复制完整 SHA1',
     'Copy the full SHA-1': '复制完整 SHA-1',
 
-    // ---- 11-软件包与代码空间
     'Package': '软件包',
     'Container': '容器',
     'Containers': '容器',
@@ -1282,7 +1241,6 @@
     'Select a tier': '选择档位',
     'Continue to payment': '继续付款',
 
-    // ---- 12-组织与主页
     'Followers': '关注者',
     'Follow': '关注',
     'Unfollow': '取消关注',
@@ -1360,7 +1318,6 @@
     'Organization': '组织',
     'Not available': '不可用',
 
-    // ---- 13-文档站
     'Select your plan:': '选择你的套餐：',
     'Free': '免费',
     'Free, Pro, & Team': '免费版、专业版与企业版',
@@ -1418,7 +1375,6 @@
     'Copy markdown': '复制 Markdown',
     'More Markdown options': '更多 Markdown 选项',
 
-    // ---- 14-博客与市场
     'Categories': '分类',
     'Search blog': '搜索博客',
     'Featured': '精选',
@@ -1468,7 +1424,6 @@
     'Permissions': '权限',
     'Reviews': '评价',
 
-    // ---- 15-通用
     'Close': '关闭',
     'Confirm': '确认',
     'Back': '返回',
@@ -1540,7 +1495,6 @@
     'Feedback': '反馈',
     'Customers': '客户',
 
-    // ---- 16-站点框架
     'Why GitHub': '为什么选择 GitHub',
     'Compare GitHub': '比较 GitHub',
     'Evaluate GitHub': '评估 GitHub',
@@ -1614,7 +1568,6 @@
     'You can’t perform that action at this time.': '此时无法执行此操作。',
     'Dismiss error': '关闭错误提示',
 
-    // ---- 17-营销与市场
     'All apps': '全部应用',
     'Agent apps': '代理应用',
     'AI Assisted': 'AI 辅助',
@@ -1706,7 +1659,6 @@
     'Navigate to the GitHub Copilot feature page': '前往 GitHub Copilot 功能页面',
     'Events': '活动',
 
-    // ---- 18-新版界面
     'Repository navigation': '仓库导航',
     'Security and quality': '安全与质量',
     'You must be signed in to change notification settings': '你需要登录才能更改通知设置',
@@ -1825,7 +1777,6 @@
     'main branch': 'main 分支',
     'master branch': 'master 分支',
 
-    // ---- 19-博客与教育
     'Secondary navigation': '次级导航',
     'Primary navigation': '主导航',
     'Search form': '搜索表单',
@@ -1972,20 +1923,18 @@
     'An introduction to innersource': '内源（innersource）入门'
   };
 
-  // 大小写兜底：「Pull Requests」也能命中「Pull requests」
   var LOWER = {};
   Object.keys(MAP).forEach(function (k) {
     var lk = k.toLowerCase();
     if (LOWER[lk] === undefined) LOWER[lk] = MAP[k];
-    else if (LOWER[lk] !== MAP[k]) LOWER[lk] = null;   // 同小写不同译法，别猜
+    else if (LOWER[lk] !== MAP[k]) LOWER[lk] = null;
   });
 
-  // ---------------------------------------------------------------- 不碰的区域
   var SKIP_TAGS = {
     SCRIPT: 1, STYLE: 1, CODE: 1, PRE: 1, KBD: 1, SAMP: 1, VAR: 1,
     TEXTAREA: 1, INPUT: 1, SVG: 1, NOSCRIPT: 1, TEMPLATE: 1
   };
-  // README、代码、评论正文、diff：宁可漏翻也不误翻
+
   var SKIP_SELECTOR = [
     'pre', 'code', 'kbd', 'samp', 'var', 'textarea', 'script', 'style',
     '.markdown-body',
@@ -2015,8 +1964,6 @@
     return false;
   }
 
-  // ---------------------------------------------------------------- 翻译
-  // 带数字的固定句式：数量是变的，句式是固定的
   var RULES = [
     [/^(\d[\d,.]*\s*[kKmM]?\+?)\s+stars?$/i, '$1 星标'],
     [/^Page\s+(\d+)$/i, '第 $1 页'],
@@ -2066,10 +2013,8 @@
     if (MAP[s]) return MAP[s];
     var low = LOWER[s.toLowerCase()];
     if (low) return low;
-    // 「Pull requests 3」「Issues · 12」这类带计数的，拆出前面的词
     var m = s.match(/^(.+?)(\s*[·(（]?\s*\d+\+?\)?)$/);
     if (m && (MAP[m[1]] || LOWER[m[1].toLowerCase()])) return (MAP[m[1]] || LOWER[m[1].toLowerCase()]) + m[2];
-    // 结尾的冒号 / 省略号
     var m2 = s.match(/^(.+?)([:：])$/);
     if (m2 && (MAP[m2[1]] || LOWER[m2[1].toLowerCase()])) return (MAP[m2[1]] || LOWER[m2[1].toLowerCase()]) + m2[2];
     for (var i = 0; i < RULES.length; i++) {
@@ -2093,7 +2038,6 @@
     t.nodeValue = lead + zh + tail;
   }
 
-  /** 只判断祖先区域（给属性用：输入框的 placeholder 也该翻，但框里的值不动） */
   function inSkipArea(el) {
     try {
       return !!(el.closest && el.closest(SKIP_SELECTOR));
@@ -2141,14 +2085,13 @@
       var guard = 0;
       while ((n = walker.nextNode())) {
         translateText(n);
-        if (++guard > 8000) break;   // 超大页面别把主线程占死
+        if (++guard > 8000) break;
       }
     } catch (e) {
     }
     translateAttrs(root);
   }
 
-  /** 浏览器标签页标题：「Issues · microsoft/vscode · GitHub」逐段翻 */
   function translateTitle() {
     try {
       var t = document.title;
@@ -2167,7 +2110,6 @@
     }
   }
 
-  // ---------------------------------------------------------------- 页面变化
   var timer = null;
   var queue = [];
   function flush() {
@@ -2188,7 +2130,6 @@
       for (var i = 0; i < muts.length; i++) {
         var m = muts[i];
         if (m.type === 'characterData') {
-          // React 水合会就地改文本节点，不算「新增节点」
           if (m.target && m.target.nodeType === 3) queue.push(m.target);
           continue;
         }
@@ -2221,7 +2162,6 @@
     setTimeout(translateTitle, 400);
   }
 
-  // 有的页面 DOMContentLoaded 会被慢资源拖到很晚，别只等它
   run();
   document.addEventListener('DOMContentLoaded', run);
   window.addEventListener('load', run);
@@ -2230,13 +2170,11 @@
     run();
   }, 300);
 
-  // Turbo / pjax / 后退前进：页面内容换了但文档没重载
   ['turbo:load', 'turbo:render', 'pjax:end', 'page:load'].forEach(function (ev) {
     document.addEventListener(ev, later);
   });
   window.addEventListener('popstate', later);
 
-  // 有些区块是滚到底才渲染的
   window.addEventListener('scroll', function () {
     if (timer) return;
     timer = setTimeout(function () {
