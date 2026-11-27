@@ -1,7 +1,8 @@
+
 {
-  "versionCode": 22,
-  "versionName": "1.0.4",
-  "downloadUrl": "https://0.wudaozhe.net/sdq/闪电球1.0.4.apk",
-  "changelog": "首页、刷新点完自动收起面板；更多新增「拦截放行」：跳转和弹窗先拦下，网页底部按钮逐条放行",
+  "versionCode": 23,
+  "versionName": "1.0.5",
+  "downloadUrl": "https://0.wudaozhe.net/sdq/闪电球1.0.5.apk",
+  "changelog": "网页蓝截控制升级，新增临时决策、阅读模式、最近处理可回手改黑白名单名单",
   "minVersionCode": 0
 }
