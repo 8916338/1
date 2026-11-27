@@ -1,7 +1,7 @@
 {
   "versionCode": 25,
   "versionName": "1.0.7",
-  "downloadUrl": "https://0.wudaozhe.net/sdq/闪电球1.0.6.apk",
+  "downloadUrl": "https://0.wudaozhe.net/sdq/闪电球1.0.7.apk",
   "changelog": "修复尚一版拦截功能,本版加入插件功能，并内置 GitHub 汉化插件；网页控制升级为网页拦截：网页自己跳转时弹框让你选放行或拦截",
   "minVersionCode": 0
 }
